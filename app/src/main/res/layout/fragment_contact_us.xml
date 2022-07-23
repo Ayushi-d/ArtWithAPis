@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/backgroundcolor"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ContactUsFragment">
+
+    <include
+        android:id="@+id/toolinclude"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        android:hint="Name"
+        android:textSize="14dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintTop_toBottomOf="@id/toolinclude"/>
+
+    <EditText
+        android:id="@+id/et_codemobile"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        android:hint="+958"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:textSize="14dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintTop_toBottomOf="@id/et_name"/>
+
+    <EditText
+        android:id="@+id/et_mobile"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        android:hint="Mobile"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        app:layout_constraintLeft_toRightOf="@id/et_codemobile"
+        android:textSize="14dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintTop_toBottomOf="@id/et_name"/>
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        android:hint="Message"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:paddingBottom="130dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintTop_toBottomOf="@id/et_mobile"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_submit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/curvebuttombackground"
+        android:backgroundTint="@color/buttongreen"
+        android:fontFamily="@font/popinsbold"
+        android:textColor="@color/white"
+        android:text="@string/submit"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/et_message" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+</androidx.constraintlayout.widget.ConstraintLayout>

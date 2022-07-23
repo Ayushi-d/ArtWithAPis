@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.Select_language">
+
+
+    <ImageView
+        android:id="@+id/Image_applogo"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/logotest"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/guidelinetop" />
+
+    <TextView
+        android:id="@+id/textlanguageselect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select your language"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/guidelinesecondtop" />
+
+    <TextView
+        android:id="@+id/textenglishh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:drawableLeft="@drawable/kuwaitnew"
+        android:drawablePadding="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/textlanguageselect"
+        android:text="English"
+        android:fontFamily="@font/nutinoregular"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/curverectangle"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/texturdu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/textenglishh"
+        android:text="العربية"
+        android:gravity="left"
+        android:fontFamily="@font/nutinoregular"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/kuwaiturdu"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/curverectangle"
+        android:textSize="17dp"/>
+
+    <ImageView
+        android:id="@+id/iconeng"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/tick"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/textenglishh"
+        app:layout_constraintBottom_toBottomOf="@id/textenglishh"
+        app:layout_constraintRight_toRightOf="@id/textenglishh"
+        android:layout_marginRight="10dp">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/iconurdu"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:src="@drawable/tick"
+        app:layout_constraintTop_toTopOf="@id/texturdu"
+        app:layout_constraintBottom_toBottomOf="@id/texturdu"
+        app:layout_constraintRight_toRightOf="@id/texturdu"
+        android:layout_marginRight="10dp">
+    </ImageView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinetop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15595075" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinesecondtop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

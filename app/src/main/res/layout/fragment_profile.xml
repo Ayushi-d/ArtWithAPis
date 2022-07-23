@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Fragments.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/basecard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/headcardbackground"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guidelinetop"
+        android:text="Profile"
+        android:textSize="17dp"
+        android:fontFamily="@font/popinsbold"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"/>
+
+    <TextView
+        android:id="@+id/textname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mohammed Ali Kandori"
+        android:textSize="18dp"
+        android:fontFamily="@font/popinsmedium"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/basecard"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/basecard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cardviewbackground">
+
+    <TextView
+        android:id="@+id/textmyorder"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/ordersicon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="16dp"
+    android:text="My Orders"/>
+
+            <TextView
+                android:id="@+id/textaddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/addressicon"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textmyorder"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="My Addresses"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewtwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/cardviewone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cardviewbackground">
+
+            <TextView
+                android:id="@+id/texttearmsandcondition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/tearmsicon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Tearms and Condition"/>
+
+            <TextView
+                android:id="@+id/textprivacypolicy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/privacyicon"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/texttearmsandcondition"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Privacy policy"/>
+
+
+            <TextView
+                android:id="@+id/textrefundpolicy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/refundicon"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textprivacypolicy"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Refund policy"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewthree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/cardviewtwo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cardviewbackground">
+
+            <TextView
+                android:id="@+id/textlanguage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/languageicon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Language"/>
+
+            <TextView
+                android:id="@+id/textchangepassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/changepassicon"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textlanguage"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Change Password"/>
+
+
+            <TextView
+                android:id="@+id/textcontactus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/contactus"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textchangepassword"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:text="Contact us"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinetop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

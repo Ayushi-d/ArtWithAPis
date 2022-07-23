@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Art_Stationary</string>
+    <string name="signin">Sign In</string>
+    <string name="Tooltext">Tooltext</string>
+    <string name="signup">Sign Up</string>
+    <string name="addtocart">Add To Cart</string>
+    <string name="submit">Submit</string>
+    <string name="update">Update</string>
+    <string name="quickly">Quickly</string>
+    <string name="abcdeffhdkfgldkghdgppdig">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="donthaveacc">Dont have an account? <font fgcolor='#003399'>Sign up</font></string> <!--gray-->
+    <string name="alreadyhaveacc">Already have an account? <font fgcolor='#003399'>Login</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string> <!--gray-->
+
+
+
+    <string name="prefuserid">ID</string>
+    <string name="prefusername">USERNAME</string>
+    <string name="prefpropertyid">_ID</string>
+    <string name="preffriendid">F_ID</string>
+    <string name="preftoken">TOKEN</string>
+    <string name="prefemail">Email</string>
+    <string name="prefDefaultValue">APP_DEFAULT</string>
+    <string name="prefName">APP_PREFERENCE</string>
+    <string name="enterValidEmail">Please Enter a Valid Email</string>
+    <string name="prefProfileImage">PROFILE_IMAGE</string>
+
+
+    <string name="prefgoogleemail">GEmail</string>
+    <string name="prefgoogleImage">GOOGLEPROFILE_IMAGE</string>
+    <string name="prefgoogleid">GOOGLEID</string>
+    <string name="prefgooglename">GOOGLENAME</string>
+
+    <string name="preffbemail">FEmail</string>
+    <string name="preffbImage">FPROFILE_IMAGE</string>
+    <string name="preffbid">FID</string>
+    <string name="preffbname">FNAME</string>
+
+</resources>

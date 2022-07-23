@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.OrdernoFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constrainstatusbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+    <ImageView
+        android:id="@+id/notconfirmion1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/notconfirmedicon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_confirmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="confirmed"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notconfirmion1"/>
+
+
+    <ImageView
+        android:id="@+id/progressbaricon1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/notconfirmion1"
+        android:src="@drawable/progresslineicom"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="5dp"
+        />
+
+    <ImageView
+        android:id="@+id/notconfirmion2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/progressbaricon1"
+        android:src="@drawable/notconfirmedicon"
+        android:layout_marginLeft="5dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_notconfirmed"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="being wrapped up"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintLeft_toLeftOf="@id/notconfirmion2"
+        app:layout_constraintRight_toRightOf="@id/notconfirmion2"
+        app:layout_constraintTop_toBottomOf="@+id/notconfirmion2"/>
+    <ImageView
+        android:id="@+id/progressbaricon2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/notconfirmion2"
+        app:layout_constraintRight_toLeftOf="@+id/notconfirmion3"
+        android:src="@drawable/progresslineicom"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/notconfirmion3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/progressbaricon2"
+        app:layout_constraintRight_toLeftOf="@+id/progressbaricon3"
+        android:src="@drawable/notconfirmedicon"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_notconfirmed3"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="on the way"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintLeft_toLeftOf="@id/notconfirmion3"
+        app:layout_constraintRight_toRightOf="@id/notconfirmion3"
+        app:layout_constraintTop_toBottomOf="@+id/notconfirmion3"/>
+
+    <ImageView
+        android:id="@+id/progressbaricon3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/notconfirmion3"
+        app:layout_constraintRight_toLeftOf="@+id/notconfirmion4"
+        android:src="@drawable/progresslineicom"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/notconfirmion4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/notconfirmedicon"
+        android:padding="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_notconfirmed4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delivered"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintLeft_toLeftOf="@id/notconfirmion4"
+        app:layout_constraintRight_toRightOf="@id/notconfirmion4"
+        app:layout_constraintTop_toBottomOf="@+id/notconfirmion4"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_address"
+        android:layout_width="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/card_grandammount">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardgrey">
+
+            <TextView
+                android:id="@+id/text_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Addrress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/popinsbold"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="11dp"
+                android:textColor="@color/blue"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/text_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_delivery"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/text_addrress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bldg. 116, Block 2, Salem Al Mubarak St.,
+5th Floor, Salmiya, Kuwait."
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_place"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/text_direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direction:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_addrress"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/text_directionwhere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Come and call me."
+                app:layout_constraintLeft_toRightOf="@id/text_direction"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_addrress"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="normal"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_grandammount"
+        android:layout_width="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/constrainstatusbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardgrey">
+
+            <TextView
+                android:id="@+id/texttotalammount"
+                android:layout_width="wrap_content"
+                android:text="Total Ammount"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/texttotalammountnum"
+                android:layout_width="wrap_content"
+                android:text="34.88"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textdeliveryplace"
+                android:layout_width="wrap_content"
+                android:text="Delivery"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/texttotalammount"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textdeliveryplacenum"
+                android:layout_width="wrap_content"
+                android:text="1000"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/texttotalammount"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/textwrraping"
+                android:layout_width="wrap_content"
+                android:text="Wrapping"
+                android:layout_marginTop="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/textdeliveryplace"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textwrrapingnum"
+                android:layout_width="wrap_content"
+                android:text="459"
+                android:layout_marginTop="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/textdeliveryplace"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textgrandtotal"
+                android:layout_width="wrap_content"
+                android:text="Grand Total"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/darkgreen"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/textwrraping"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:fontFamily="@font/popinsbold"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textgrandtotalnum"
+                android:layout_width="wrap_content"
+                android:text="43,000"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/darkgreen"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/textwrraping"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="5dp"
+                android:textSize="16dp"
+                android:fontFamily="@font/popinsbold"
+                android:layout_height="wrap_content"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerorderno"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/card_address"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

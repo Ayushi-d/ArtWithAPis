@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textdescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="BiC Multi Colour Ballpoint PensDress"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imagecard"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toTopOf="@id/imagecard" />
+
+    <TextView
+        android:id="@+id/textprice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="15.0000 KWD"
+        android:textColor="@color/blue"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imagecard"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/textdescription"/>
+
+    <TextView
+        android:id="@+id/textquantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity :"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/imagecard"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imagecard"
+         />
+
+    <TextView
+        android:id="@+id/textquantityno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="3"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toRightOf="@id/textquantity"
+        app:layout_constraintBottom_toBottomOf="@id/imagecard" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imagecard"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/img_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/custombookimage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
