@@ -22,7 +22,11 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import okhttp3.MultipartBody;
 
 public class Singin extends AppCompatActivity implements ServiceResponse {
     TextView txt_donthaveacc;
@@ -74,18 +78,9 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         button_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String emailInput = et_email.getText().toString().trim();
-                String passwordInput = et_password.getText().toString().trim();
 
-                if (emailInput.equals("")){
-                    et_email.setError("Please enter you registered email");
-                }else if (passwordInput.equals("")){
-                    et_password.setError("Please enter you valid password");
-                }else {
-                    getSignin(emailInput,passwordInput);
-                }
+                   confirmInput(view);
 
-                confirmInput(view);
             }
         });
         text_forgotpass.setOnClickListener(new View.OnClickListener() {
@@ -117,9 +112,6 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         if (passwordInput.isEmpty()) {
             et_password.setError("Field can't be empty");
             return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            et_password.setError("Password too weak");
-            return false;
         } else {
             et_password.setError(null);
             return true;
@@ -128,22 +120,17 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
     public void confirmInput(View v) {
         if ( !validateEmail() | !validatePassword()) {
             return;
+        }else {
+            String emailInput = et_email.getText().toString().trim();
+            String passwordInput = et_password.getText().toString().trim();
+            getSignin(emailInput,passwordInput);
         }
-
-        String input = "Email: " + et_email.getText().toString();
-        input += "\n";
-        input += "Password: " + et_password.getText().toString();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
-
-        Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show();
     }
 
     private void getSignin(String StrRegEmail, String StrRegpass) {
-        JsonObject data =new  JsonObject();
-        data.addProperty("email", StrRegEmail);
-        data.addProperty("password", StrRegpass);
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("email",StrRegEmail));
+        data.add(MultipartBody.Part.createFormData("password",StrRegpass));
         new RetrofitService(this, ServiceUrls.LOGIN, 2, 1, data, this)
                 .callService(true);
     }
@@ -153,14 +140,16 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         if (requestCode == 1) {
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                if (jsonObject.has("statusCode") && jsonObject.optInt("statusCode")==200) {
-                    JSONObject jsonArray = jsonObject.getJSONObject("data");
-                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
-                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
+                if (resCode==200) {
+//                    JSONObject jsonArray = jsonObject.getJSONObject("data");
+//                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
+//                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
+//
+//                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
-                    Intent send = new Intent(Singin.this, HomeFragment.class);
-                    startActivity(send);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
 

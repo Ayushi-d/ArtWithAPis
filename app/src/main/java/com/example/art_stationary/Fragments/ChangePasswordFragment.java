@@ -32,7 +32,11 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import okhttp3.MultipartBody;
 
 public class ChangePasswordFragment extends Fragment  implements ServiceResponse {
     BottomNavigationView navBar;
@@ -91,7 +95,7 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
                 String StrOldpass= et_currentpassword.getText().toString();
                 String StrNewpass= et_newpassword.getText().toString();
                 String StrConfpass= et_confirmpassword.getText().toString();
-                confirmInput(view);
+              //  confirmInput(view);
                 if (StrOldpass.equals("")){
                     et_currentpassword.setError("Please enter your old password");
                 }else if (StrNewpass.equals("")){
@@ -99,7 +103,7 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
                 }else if (StrConfpass.equals("")){
                     et_currentpassword.setError("Please enter your Confirm password");
                 }else {
-                    getchangepassword("",StrOldpass,StrNewpass,StrOldpass);
+                    getchangepassword("0",StrOldpass,StrNewpass,StrOldpass);
                 }
             }
         });
@@ -149,11 +153,11 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
         }
     }
     private void getchangepassword(String loginid, String oldpass, String newpass, String confpassword) {
-        JsonObject data =new  JsonObject();
-        data.addProperty("loginid", loginid);
-        data.addProperty("oldpassword", oldpass);
-        data.addProperty("newpassword", newpass);
-        data.addProperty("confpassword", confpassword);
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("loginid",loginid));
+        data.add(MultipartBody.Part.createFormData("oldpassword",oldpass));
+        data.add(MultipartBody.Part.createFormData("newpassword",newpass));
+        data.add(MultipartBody.Part.createFormData("confpassword",confpassword));
         new RetrofitService(getContext(), ServiceUrls.CHANGEPASSWORD, 2, 1, data, this)
                 .callService(true);
     }
@@ -164,18 +168,18 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(TAG, "onServiceResponse: API Response---"+result.toString());
-                if (jsonObject.has("statusCode") && jsonObject.optInt("statusCode")==200) {
-                    JSONObject jsonArray = jsonObject.getJSONObject("data");
-                    PreferenceHelper.getInstance(getContext()).setusername(jsonArray.optString("fullname"));
-                    PreferenceHelper.getInstance(getContext()).setemail(jsonArray.optString("email"));
-                    jsonArray.optString("mobile");
-                    jsonArray.optString("devicetoken");
-                    jsonArray.optString("devicetype");
-                    PreferenceHelper.getInstance(getContext()).setid(jsonObject.optString("_id"));
-
-                    Toast.makeText(getContext(), jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
-                    Intent send = new Intent(getContext(), Singin.class);
-                    startActivity(send);
+                if (resCode==200) {
+//                    JSONObject jsonArray = jsonObject.getJSONObject("data");
+//                    PreferenceHelper.getInstance(getContext()).setusername(jsonArray.optString("fullname"));
+//                    PreferenceHelper.getInstance(getContext()).setemail(jsonArray.optString("email"));
+//                    jsonArray.optString("mobile");
+//                    jsonArray.optString("devicetoken");
+//                    jsonArray.optString("devicetype");
+//                    PreferenceHelper.getInstance(getContext()).setid(jsonObject.optString("_id"));
+//
+                    Toast.makeText(getContext(), "Password Updated Successfully", Toast.LENGTH_SHORT).show();
+//                    Intent send = new Intent(getContext(), Singin.class);
+//                    startActivity(send);
                 }
 
 

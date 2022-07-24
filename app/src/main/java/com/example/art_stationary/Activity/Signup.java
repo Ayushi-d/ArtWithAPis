@@ -25,7 +25,12 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import okhttp3.MultipartBody;
 
 public class Signup extends AppCompatActivity implements ServiceResponse {
 
@@ -176,14 +181,14 @@ public class Signup extends AppCompatActivity implements ServiceResponse {
         }
     }
     private void getRegisterNewUser(String StrRegEmail, String StrRegpass,String StrFullname,String Strmobile,String StrConfpass,String StrDeviceToken) {
-        JsonObject data =new  JsonObject();
-        data.addProperty("fullname", StrFullname);
-        data.addProperty("email", StrRegEmail);
-        data.addProperty("mobile", Strmobile);
-        data.addProperty("password", StrRegpass);
-        data.addProperty("confpassword",StrConfpass );
-        data.addProperty("devicetoken","" );
-        data.addProperty("devicetype", "2");
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("fullname",StrFullname));
+        data.add(MultipartBody.Part.createFormData("email",StrRegEmail));
+        data.add(MultipartBody.Part.createFormData("mobile",Strmobile));
+        data.add(MultipartBody.Part.createFormData("password",StrRegpass));
+        data.add(MultipartBody.Part.createFormData("confpassword",StrConfpass));
+        data.add(MultipartBody.Part.createFormData("devicetoken",""));
+        data.add(MultipartBody.Part.createFormData("devicetype","2"));
         new RetrofitService(this, ServiceUrls.REGISTER, 2, 1, data, this)
                 .callService(true);
     }
@@ -194,25 +199,23 @@ public class Signup extends AppCompatActivity implements ServiceResponse {
 
         if (requestCode == 1) {
             try {
-                JSONObject jsonObject = new JSONObject(result);
+                //JSONObject jsonObject = new JSONObject(result);
                 Log.d(TAG, "onServiceResponse: API Response---"+result.toString());
-                if (jsonObject.has("statusCode") && jsonObject.optInt("statusCode")==200) {
-                    JSONObject jsonArray = jsonObject.getJSONObject("data");
-                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
-                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
-                    jsonArray.optString("mobile");
-                    jsonArray.optString("devicetoken");
-                    jsonArray.optString("devicetype");
-                    PreferenceHelper.getInstance(this).setid(jsonObject.optString("_id"));
+                if (resCode==200) {
+//                    JSONObject jsonArray = jsonObject.getJSONObject("data");
+//                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
+//                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
+//                    jsonArray.optString("mobile");
+//                    jsonArray.optString("devicetoken");
+//                    jsonArray.optString("devicetype");
+//                    PreferenceHelper.getInstance(this).setid(jsonObject.optString("_id"));
 
-                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
                     Intent send = new Intent(Signup.this, Singin.class);
                     startActivity(send);
                     }
-
-
-                } catch (Exception e) {
-                Log.d(TAG, "onServiceResponse: API Response---"+e.toString());
+             } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API execption---"+e.toString());
 
                 e.printStackTrace();
             }

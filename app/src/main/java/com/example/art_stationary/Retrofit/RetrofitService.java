@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Multipart;
 
 
 public class RetrofitService {
@@ -43,6 +45,7 @@ public class RetrofitService {
     private int mRequestCode;
     private Call<ResponseBody> mCall;
     private JsonObject body;
+    private List<MultipartBody.Part> data;
     private ServiceResponse mResponce;
     private MultipartBody.Part photoPart;
     private Map<String, RequestBody> mbody;
@@ -79,6 +82,18 @@ public class RetrofitService {
         this.body = mBody;
 
     }
+
+    public RetrofitService(Context mContext,  String mUrl, int mValue,
+                           int mRequestCode,   List<MultipartBody.Part> mdata,ServiceResponse mResponce) {
+        this.mContext = mContext;
+        this.mUrl = mUrl;
+        this.mValue = mValue;
+        this.mRequestCode = mRequestCode;
+        this.mResponce = mResponce;
+        this.data = mdata;
+
+    }
+
      //raw with token
     public RetrofitService(Context mContext, String mUrl,String mtoken, int mValue, int mRequestCode, JsonObject body, ServiceResponse mResponce) {
         this.mContext = mContext;
@@ -165,8 +180,9 @@ public class RetrofitService {
 
         //single raw (post)
          else if (mValue == 2) {
-            Log.d(TAG,  "///" + mUrl + "///" + body);
-            mCall = retrofitApi.makePostRequest(mUrl, body);
+            Log.d(TAG,  "///" + mUrl + "///" + data);
+            //mCall = retrofitApi.makePostRequest(mUrl, body);
+            mCall = retrofitApi.makeMultipleImgUpload(mUrl,data);
         }
 
         else if (mValue == 3) {

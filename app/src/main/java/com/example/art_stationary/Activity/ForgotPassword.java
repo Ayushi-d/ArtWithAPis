@@ -24,6 +24,11 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MultipartBody;
+
 public class ForgotPassword extends AppCompatActivity implements ServiceResponse {
 
     ConstraintLayout toolbar;
@@ -58,8 +63,8 @@ public class ForgotPassword extends AppCompatActivity implements ServiceResponse
 
 
     private void getForgotpassword(String StrRegEmail) {
-        JsonObject data =new  JsonObject();
-        data.addProperty("email", StrRegEmail);
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("email",StrRegEmail));
         new RetrofitService(this, ServiceUrls.FORGOT, 2, 1, data, this)
                 .callService(true);
     }
@@ -70,16 +75,16 @@ public class ForgotPassword extends AppCompatActivity implements ServiceResponse
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(TAG, "onServiceResponse: API Response---"+result.toString());
-                if (jsonObject.has("statusCode") && jsonObject.optInt("statusCode")==200) {
-                    JSONObject jsonArray = jsonObject.getJSONObject("data");
-                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
-                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
-                    jsonArray.optString("mobile");
-                    jsonArray.optString("devicetoken");
-                    jsonArray.optString("devicetype");
-                    PreferenceHelper.getInstance(this).setid(jsonObject.optString("_id"));
+                if (resCode==200) {
+//                    JSONObject jsonArray = jsonObject.getJSONObject("data");
+//                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
+//                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
+//                    jsonArray.optString("mobile");
+//                    jsonArray.optString("devicetoken");
+//                    jsonArray.optString("devicetype");
+//                    PreferenceHelper.getInstance(this).setid(jsonObject.optString("_id"));
 
-                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Successfully Sent To email", Toast.LENGTH_SHORT).show();
                     /*Intent send = new Intent(ForgotPassword.this, Singin.class);
                     startActivity(send);*/
                 }

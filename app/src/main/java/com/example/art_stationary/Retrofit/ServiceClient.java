@@ -2,6 +2,7 @@ package com.example.art_stationary.Retrofit;
 
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -33,6 +36,10 @@ public interface ServiceClient {
     @POST
     Call<ResponseBody> makePostRequest(@Url String url, @Body JsonObject body);
 
+    @FormUrlEncoded
+    @POST
+    Call<ResponseBody> makePostFormDataRequest(@Url String url, @Field("title") HashMap data);
+
     @POST
     Call<ResponseBody> makePostrawRequest(/*@Header("Content-Type") String header,*/@Header("x-access-token") String token,@Url String url, @Body JsonObject body);
 
@@ -51,9 +58,13 @@ public interface ServiceClient {
     @Multipart
     Call<ResponseBody> makePostWTokenRequest(@Header("token") String token, @Url String url, @PartMap JsonObject object);
 
+//    @Multipart
+//    @POST
+//    Call<ResponseBody> makeMultipleImgUpload(@Url String url, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> data);
+
     @Multipart
     @POST
-    Call<ResponseBody> makeMultipleImgUpload(@Url String url, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> imagesList);
+    Call<ResponseBody> makeMultipleImgUpload(@Url String url, @Part List<MultipartBody.Part> data);
 
 
 
@@ -80,4 +91,5 @@ public interface ServiceClient {
 
     @DELETE
     Call<ResponseBody> makedeleterequest( @Url String url);
+
 }
