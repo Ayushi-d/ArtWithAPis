@@ -1,5 +1,7 @@
 package com.example.art_stationary.Fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +20,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.art_stationary.Activity.MainActivity;
+import com.example.art_stationary.Activity.Signup;
+import com.example.art_stationary.Activity.Singin;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Retrofit.RetrofitService;
+import com.example.art_stationary.Retrofit.ServiceResponse;
+import com.example.art_stationary.Retrofit.ServiceUrls;
+import com.example.art_stationary.Utils.PreferenceHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
-public class ChangePasswordFragment extends Fragment {
+public class ChangePasswordFragment extends Fragment  implements ServiceResponse {
     BottomNavigationView navBar;
     ConstraintLayout toolbar;
     TextView tooltext;
@@ -76,7 +88,19 @@ public class ChangePasswordFragment extends Fragment {
         button_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String StrOldpass= et_currentpassword.getText().toString();
+                String StrNewpass= et_newpassword.getText().toString();
+                String StrConfpass= et_confirmpassword.getText().toString();
                 confirmInput(view);
+                if (StrOldpass.equals("")){
+                    et_currentpassword.setError("Please enter your old password");
+                }else if (StrNewpass.equals("")){
+                    et_currentpassword.setError("Please enter your New password");
+                }else if (StrConfpass.equals("")){
+                    et_currentpassword.setError("Please enter your Confirm password");
+                }else {
+                    getchangepassword("",StrOldpass,StrNewpass,StrOldpass);
+                }
             }
         });
 
@@ -91,7 +115,6 @@ public class ChangePasswordFragment extends Fragment {
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
             et_newpassword.setError("Password too weak");
             return false;
-
         }else {
             return true;
         }
@@ -124,5 +147,49 @@ public class ChangePasswordFragment extends Fragment {
             Toast.makeText(getActivity(), "Password Changed Sucessfull", Toast.LENGTH_SHORT).show();
 
         }
+    }
+    private void getchangepassword(String loginid, String oldpass, String newpass, String confpassword) {
+        JsonObject data =new  JsonObject();
+        data.addProperty("loginid", loginid);
+        data.addProperty("oldpassword", oldpass);
+        data.addProperty("newpassword", newpass);
+        data.addProperty("confpassword", confpassword);
+        new RetrofitService(getContext(), ServiceUrls.CHANGEPASSWORD, 2, 1, data, this)
+                .callService(true);
+    }
+
+    @Override
+    public void onServiceResponse(String result, int requestCode, int resCode) {
+        if (requestCode == 1) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                Log.d(TAG, "onServiceResponse: API Response---"+result.toString());
+                if (jsonObject.has("statusCode") && jsonObject.optInt("statusCode")==200) {
+                    JSONObject jsonArray = jsonObject.getJSONObject("data");
+                    PreferenceHelper.getInstance(getContext()).setusername(jsonArray.optString("fullname"));
+                    PreferenceHelper.getInstance(getContext()).setemail(jsonArray.optString("email"));
+                    jsonArray.optString("mobile");
+                    jsonArray.optString("devicetoken");
+                    jsonArray.optString("devicetype");
+                    PreferenceHelper.getInstance(getContext()).setid(jsonObject.optString("_id"));
+
+                    Toast.makeText(getContext(), jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
+                    Intent send = new Intent(getContext(), Singin.class);
+                    startActivity(send);
+                }
+
+
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Response---"+e.toString());
+
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onServiceError(String error, int requestCode, int resCode) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onServiceResponse: API Error---"+error.toString());
     }
 }

@@ -144,7 +144,7 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         JsonObject data =new  JsonObject();
         data.addProperty("email", StrRegEmail);
         data.addProperty("password", StrRegpass);
-        new RetrofitService(this, ServiceUrls.REGISTER, 2, 1, data, this)
+        new RetrofitService(this, ServiceUrls.LOGIN, 2, 1, data, this)
                 .callService(true);
     }
 
