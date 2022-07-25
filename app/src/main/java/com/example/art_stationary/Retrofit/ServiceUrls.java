@@ -6,6 +6,7 @@ public class ServiceUrls {
     public static final String LOGIN= "artbookstore/login";
     public static final String FORGOT= "artbookstore/forgotpassword";
     public static final String CHANGEPASSWORD= "artbookstore/changepassword";
-
+    public static final String PRIVACYPOLICY= "artbookstore/refundpolicy";
+    public static final String REFUNDPOLICY= "artbookstore/privacypolicy";
 
 }

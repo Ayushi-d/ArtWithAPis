@@ -154,7 +154,7 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
 //                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                     startActivity(intent);
                     finish();
                 }
 
