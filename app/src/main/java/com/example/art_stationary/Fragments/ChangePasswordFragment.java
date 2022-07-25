@@ -103,7 +103,9 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
                 }else if (StrConfpass.equals("")){
                     et_currentpassword.setError("Please enter your Confirm password");
                 }else {
-                    getchangepassword("0",StrOldpass,StrNewpass,StrOldpass);
+                    String loginID = PreferenceHelper.getInstance(getActivity()).getid();
+
+                    getchangepassword(loginID,StrOldpass,StrNewpass,StrOldpass);
                 }
             }
         });

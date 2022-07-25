@@ -1,9 +1,12 @@
 package com.example.art_stationary.Activity;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.PreferenceHelper;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -141,10 +145,12 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
-//                    JSONObject jsonArray = jsonObject.getJSONObject("data");
-//                    PreferenceHelper.getInstance(this).setusername(jsonArray.optString("fullname"));
-//                    PreferenceHelper.getInstance(this).setemail(jsonArray.optString("email"));
-//
+                      JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    JSONObject data = jsonArray.getJSONObject(0);
+                    Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
+
+                      PreferenceHelper.getInstance(this).setid(data.optString("id"));
 //                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
