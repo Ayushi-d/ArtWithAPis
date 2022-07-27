@@ -1,5 +1,8 @@
 package com.example.art_stationary.Fragments;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -8,17 +11,32 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.art_stationary.Activity.MainActivity;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Retrofit.RetrofitService;
+import com.example.art_stationary.Retrofit.ServiceResponse;
+import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.example.art_stationary.Utils.Gloabal_View;
+import com.example.art_stationary.Utils.PreferenceHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class ProfileFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MultipartBody;
+
+
+public class ProfileFragment extends Fragment implements ServiceResponse {
     TextView texttearmsandcondition;
     TextView textprivacypolicy;
     TextView textrefundpolicy;
@@ -26,6 +44,7 @@ public class ProfileFragment extends Fragment {
     TextView textmyorder;
     TextView textaddress;
     BottomNavigationView navBar;
+    TextView textname;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,8 +70,10 @@ public class ProfileFragment extends Fragment {
         textchangepassword = view.findViewById(R.id.textchangepassword);
         textmyorder = view.findViewById(R.id.textmyorder);
         textaddress = view.findViewById(R.id.textaddress);
+        textname = view.findViewById(R.id.textname);
 
 
+        getProfile("");
         texttearmsandcondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +121,40 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //loginid
+
         return view;
     }
 
+
+    private void getProfile(String name) {
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("loginid",name));
+        new RetrofitService(getContext(), ServiceUrls.MYPROFILE, 2, 1, data, this)
+                .callService(true);
+    }
+
+    @Override
+    public void onServiceResponse(String result, int requestCode, int resCode) {
+        if (requestCode == 1) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if (resCode==200) {
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    JSONObject data = jsonArray.getJSONObject(0);
+                    Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    public void onServiceError(String error, int requestCode, int resCode) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
 }

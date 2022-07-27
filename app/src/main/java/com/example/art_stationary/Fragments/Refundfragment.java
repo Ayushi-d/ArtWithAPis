@@ -79,7 +79,7 @@ public class Refundfragment extends Fragment implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(ContentValues.TAG, "onServiceResponse: API Response---"+result.toString());
                 if (resCode==200) {
-                    Toast.makeText(getContext(), "Password Updated Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Sucess", Toast.LENGTH_SHORT).show();
 
                 }
 
