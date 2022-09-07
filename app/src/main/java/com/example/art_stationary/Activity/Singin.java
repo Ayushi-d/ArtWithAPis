@@ -131,6 +131,11 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void getSignin(String StrRegEmail, String StrRegpass) {
         List<MultipartBody.Part> data = new ArrayList<>();
         data.add(MultipartBody.Part.createFormData("email",StrRegEmail));
@@ -145,7 +150,7 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
-                      JSONObject output = jsonObject.getJSONObject("output");
+                    JSONObject output = jsonObject.getJSONObject("output");
                     JSONArray jsonArray =  output.getJSONArray("data");
                     JSONObject data = jsonArray.getJSONObject(0);
                     Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));

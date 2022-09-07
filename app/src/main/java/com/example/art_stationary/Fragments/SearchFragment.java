@@ -30,6 +30,7 @@ public class SearchFragment extends Fragment {
     SwipeRefreshLayout swipe_listitem;
     RecyclerView searchlist;
     private ArrayList<Searchmodel> searcharraylist;
+    ConstraintLayout img_back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,18 @@ public class SearchFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_search, container, false);
         toolbar = view.findViewById(R.id.toolbar);
         tooltext = toolbar.findViewById(R.id.toolheadtext);
+        img_back = view.findViewById(R.id.img_back);
         tooltext.setText("Search");
 
         swipe_listitem = view.findViewById(R.id.swipe_listitem);
         searchlist = view.findViewById(R.id.searchlist);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         searcharraylist=new ArrayList<>();
 

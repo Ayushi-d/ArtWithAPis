@@ -92,8 +92,11 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
         txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gloabal_View.changeFragment(getActivity(), new AddressFragment());
-
+                Bundle bundle = new Bundle();
+                bundle.putString("addressID","");
+                AddressFragment addressFragment = new AddressFragment();
+                addressFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), addressFragment);
             }
         });
         button_paynow.setOnClickListener(new View.OnClickListener() {

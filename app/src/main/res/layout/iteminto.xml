@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/imagebookicon"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:src="@drawable/navigationbookicon"
         app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
         app:layout_constraintRight_toRightOf="@id/guidelineright"
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
+        app:layout_constraintGuide_percent="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

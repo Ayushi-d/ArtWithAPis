@@ -13,18 +13,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/popinsmedium"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:text="@string/dummytext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
         app:layout_constraintRight_toRightOf="@id/guidelineright"
-        app:layout_constraintTop_toBottomOf="@id/toolinclude" />
+        app:layout_constraintTop_toBottomOf="@id/toolinclude" >
+
+        <TextView
+            android:id="@+id/contentText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/popinsmedium"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
+
+    </ScrollView>
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineleft"

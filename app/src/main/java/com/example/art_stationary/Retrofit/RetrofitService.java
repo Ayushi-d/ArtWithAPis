@@ -152,7 +152,7 @@ public class RetrofitService {
     }
 
         if (showProgress) {
-           //dialog.show();
+           dialog.show();
         }
         //dialog.dismiss();
 

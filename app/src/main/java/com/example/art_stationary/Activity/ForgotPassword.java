@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ public class ForgotPassword extends AppCompatActivity implements ServiceResponse
     TextView tooltext;
     EditText et_email;
     Button button_submit;
+    ConstraintLayout img_back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +48,9 @@ public class ForgotPassword extends AppCompatActivity implements ServiceResponse
         toolbar =   findViewById(R.id.toolbar);
         et_email =   findViewById(R.id.et_email);
         button_submit =   findViewById(R.id.button_submit);
+        img_back = findViewById(R.id.img_back);
         tooltext = toolbar.findViewById(R.id.toolheadtext);
         tooltext.setText("Forgot Password");
-
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +60,13 @@ public class ForgotPassword extends AppCompatActivity implements ServiceResponse
                 }else {
                     getForgotpassword(Stremail);
                 }
+            }
+        });
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 

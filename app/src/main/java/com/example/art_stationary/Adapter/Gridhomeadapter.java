@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Model.Recyclerhomemodel;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,8 @@ public class Gridhomeadapter extends RecyclerView.Adapter<Gridhomeadapter.Recycl
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
         Recyclerhomemodel recyclerData = courseDataArrayList.get(position);
-        holder.img_book.setImageResource(recyclerData.getImgid());
+       // holder.img_book.setImageResource(recyclerData.getImgid());
+        Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerData.getImgid()).into(holder.img_book);
         holder.tv_bookname.setText(recyclerData.getTitle());
         holder.tv_pricebook.setText(recyclerData.getPrice());
         holder.img_book.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +50,6 @@ public class Gridhomeadapter extends RecyclerView.Adapter<Gridhomeadapter.Recycl
             }
         });
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -79,8 +79,5 @@ public class Gridhomeadapter extends RecyclerView.Adapter<Gridhomeadapter.Recycl
     public void setOnItemClickListener(ClickListener clickListener) {
         this.mOnClickListener = clickListener;
     }
-
-
-
 
 }

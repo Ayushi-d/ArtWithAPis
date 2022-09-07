@@ -1,5 +1,8 @@
 package com.example.art_stationary.Fragments;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.ContentValues;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -13,31 +16,41 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.art_stationary.Adapter.BrandAdpter;
 import com.example.art_stationary.Adapter.Gridhomeadapter;
 import com.example.art_stationary.Adapter.Mostpopularadapter;
 import com.example.art_stationary.Adapter.Offeradapter;
 import com.example.art_stationary.Adapter.ViewPagerAdapter;
+import com.example.art_stationary.Model.BannerModel;
 import com.example.art_stationary.Model.BrandModel;
 import com.example.art_stationary.Model.Mostpopularmodel;
 import com.example.art_stationary.Model.Offermodel;
 import com.example.art_stationary.Model.Recyclerhomemodel;
+import com.example.art_stationary.Retrofit.RetrofitService;
+import com.example.art_stationary.Retrofit.ServiceResponse;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.example.art_stationary.Utils.Gloabal_View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ServiceResponse {
     ViewPager viewPager;
     private RecyclerView gridlist;
     private RecyclerView verticallist;
@@ -49,13 +62,17 @@ public class HomeFragment extends Fragment {
     LinearLayout dotsLayout;
     ImageView imagesearch;
     TextView text_viewall;
-
+    Gridhomeadapter newArrivaladapter;
+    ViewPagerAdapter viewPagerAdapter;
+    BrandAdpter brandAdpter;
+    Mostpopularadapter mostpopularadapter;
 
 
     private ArrayList<Recyclerhomemodel> recyclerDataArrayList;
     private ArrayList<BrandModel> verticalArraylist;
     private ArrayList<Offermodel> OffersArraylist;
     private ArrayList<Mostpopularmodel> mostpopularArraylist;
+    private ArrayList<BannerModel> bannerArrayList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,8 +91,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         getActivity().getWindow().setStatusBarColor(getActivity().getColor(R.color.black));
         viewPager = view.findViewById(R.id.viewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity());
-        viewPager.setAdapter(viewPagerAdapter);
         BottomNavigationView navBar = getActivity().findViewById(R.id.bottomNavigationView);
         navBar.setVisibility(View.VISIBLE);
 
@@ -89,6 +104,16 @@ public class HomeFragment extends Fragment {
         Offerslist = view.findViewById(R.id.Offerslist);
         mostpopularlist = view.findViewById(R.id.mostpopularlist);
         dotsLayout = view.findViewById(R.id.SliderDots);
+
+        recyclerDataArrayList = new ArrayList<>();
+        verticalArraylist = new ArrayList<>();
+        OffersArraylist = new ArrayList<>();
+        mostpopularArraylist = new ArrayList<>();
+        bannerArrayList = new ArrayList<>();
+        getHomePageData();
+
+        viewPagerAdapter = new ViewPagerAdapter(getActivity(),bannerArrayList);
+        viewPager.setAdapter(viewPagerAdapter);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -105,41 +130,38 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // created new array list..
-        recyclerDataArrayList = new ArrayList<>();
-        verticalArraylist = new ArrayList<>();
-        OffersArraylist = new ArrayList<>();
-        mostpopularArraylist = new ArrayList<>();
 
-        // added data to grid array list
-        recyclerDataArrayList.add(new Recyclerhomemodel("STABILO Swing Cool ", "12.00 KWD", R.drawable.custombookimage));
-        recyclerDataArrayList.add(new Recyclerhomemodel("STABILO Swing Cool ", "34.66 KWD", R.drawable.custombookimage));
-        recyclerDataArrayList.add(new Recyclerhomemodel("STABILO Swing Cool ", "77.88 KWD", R.drawable.custombookimage));
-        recyclerDataArrayList.add(new Recyclerhomemodel("STABILO Swing Cool ", "56.00 KWD", R.drawable.custombookimage));
-        Gridhomeadapter adapter = new Gridhomeadapter(recyclerDataArrayList, getActivity());
+        newArrivaladapter = new Gridhomeadapter(recyclerDataArrayList, getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         gridlist.setLayoutManager(layoutManager);
-        adapter.setOnItemClickListener(new Gridhomeadapter.ClickListener() {
+        newArrivaladapter.setOnItemClickListener(new Gridhomeadapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Gloabal_View.changeFragment(getActivity(), new ItemFragment());
-
+                Bundle bundle = new Bundle();
+                bundle.putString("prodid", recyclerDataArrayList.get(position).getid());
+                ItemFragment itemFragment = new ItemFragment();
+                itemFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), itemFragment);
             }
         });
-        gridlist.setAdapter(adapter);
+        gridlist.setAdapter(newArrivaladapter);
 
-        // added data to Vertical array list
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        verticalArraylist.add(new BrandModel(R.drawable.custombrands));
-        BrandAdpter verticaladapter = new BrandAdpter(verticalArraylist, getActivity());
+
+        brandAdpter = new BrandAdpter(verticalArraylist, getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.HORIZONTAL, false);
         verticallist.setLayoutManager(gridLayoutManager);
-        verticallist.setAdapter(verticaladapter);
+        verticallist.setAdapter(brandAdpter);
+
+        brandAdpter.setOnItemClickListener(new BrandAdpter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("brandid", verticalArraylist.get(position).getid());
+                ViewAllFragment viewAllFragment = new ViewAllFragment();
+                viewAllFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), viewAllFragment);
+            }
+        });
 
         // added data to Offer array list
         OffersArraylist.add(new Offermodel(R.drawable.offerplaceholder));
@@ -151,22 +173,21 @@ public class HomeFragment extends Fragment {
         Offerslist.setLayoutManager(offermanager);
         Offerslist.setAdapter(offeradapter);
 
-        // added data to Popular array list
-        mostpopularArraylist.add(new Mostpopularmodel("Java", "12.00 KWD", R.drawable.custombookimage));
-        mostpopularArraylist.add(new Mostpopularmodel("Java", "12.00 KWD", R.drawable.custombookimage));
-        mostpopularArraylist.add(new Mostpopularmodel("Java", "12.00 KWD", R.drawable.custombookimage));
-        mostpopularArraylist.add(new Mostpopularmodel("Java", "12.00 KWD", R.drawable.custombookimage));
-        Mostpopularadapter mostpopularadapter = new Mostpopularadapter(mostpopularArraylist, getActivity());
+
+        mostpopularadapter = new Mostpopularadapter(mostpopularArraylist, getActivity());
         LinearLayoutManager mostpopularmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mostpopularlist.setLayoutManager(mostpopularmanager);
         mostpopularlist.setAdapter(mostpopularadapter);
-        addDots();
+
 
         text_viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gloabal_View.changeFragment(getActivity(), new ViewAllFragment());
-
+                Bundle bundle = new Bundle();
+                bundle.putString("brandid", "");
+                ViewAllFragment viewAllFragment = new ViewAllFragment();
+                viewAllFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), viewAllFragment);
             }
         });
         imagesearch.setOnClickListener(new View.OnClickListener() {
@@ -178,11 +199,84 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void getHomePageData() {
+        new RetrofitService(getContext(), ServiceUrls.HOMEAPI,
+                1, 1, this).callService(true);
+    }
+
+
+    @Override
+    public void onServiceResponse(String result, int requestCode, int resCode) {
+        if (requestCode == 1) {
+            try {
+                if (resCode==200) {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    Log.d(TAG, "onServiceResponse: Outpuut Response---"+output.toString());
+
+                    JSONArray bannerArray =  output.getJSONArray("banners");
+                    for (int i = 0; i < bannerArray.length(); i++){
+                        JSONObject data = bannerArray.optJSONObject(i);
+                        BannerModel bannerModel = new BannerModel();
+                        bannerModel.setImgid(data.optString("image"));
+                        bannerArrayList.add(bannerModel);
+                    }
+                    viewPagerAdapter.notifyDataSetChanged();
+                    addDots();
+                    JSONArray newArrivalsArray =  output.getJSONArray("newarrivals");
+                    for (int i = 0; i < newArrivalsArray.length(); i++){
+                        JSONObject data = newArrivalsArray.optJSONObject(i);
+                        Recyclerhomemodel newArrivalModel = new Recyclerhomemodel();
+                        newArrivalModel.setTitle(data.optString("title"));
+                        newArrivalModel.setPrice(data.optString("price"));
+                        newArrivalModel.setImgid(data.optString("image"));
+                        newArrivalModel.setid(data.optString("id"));
+                        recyclerDataArrayList.add(newArrivalModel);
+                    }
+                    newArrivaladapter.notifyDataSetChanged();
+
+                    JSONArray brandsArray =  output.getJSONArray("brands");
+                    for (int i = 0; i < brandsArray.length(); i++){
+                        JSONObject data = brandsArray.optJSONObject(i);
+                        BrandModel brandModel = new BrandModel();
+                        brandModel.setImgid(data.optString("image"));
+                        brandModel.setid(data.optString("id"));
+                        verticalArraylist.add(brandModel);
+                    }
+                    brandAdpter.notifyDataSetChanged();
+
+                    JSONArray popularArray =  output.getJSONArray("mostpopular");
+                    for (int i = 0; i < popularArray.length(); i++){
+                        JSONObject data = popularArray.optJSONObject(i);
+                        Mostpopularmodel mostpopularmodel = new Mostpopularmodel();
+                        mostpopularmodel.setTitle(data.optString("title"));
+                        mostpopularmodel.setPrice(data.optString("price"));
+                        mostpopularmodel.setImgid(data.optString("image"));
+                        mostpopularmodel.setid(data.optString("id"));
+                        mostpopularArraylist.add(mostpopularmodel);
+                    }
+                    mostpopularadapter.notifyDataSetChanged();
+
+                }
+
+
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onServiceError(String error, int requestCode, int resCode) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
+
     public void addDots() {
         dots = new ArrayList<>();
 
 
-        for (int i = 0; i < NUM_PAGES; i++) {
+        for (int i = 0; i < bannerArrayList.size(); i++) {
             ImageView dot = new ImageView(getActivity());
             if (i == 0){
                 dot.setImageDrawable(getResources().getDrawable(R.drawable.selecteddots));
@@ -199,7 +293,7 @@ public class HomeFragment extends Fragment {
 
     public void selectDot(int idx) {
         Resources res = getResources();
-        for (int i = 0; i < NUM_PAGES; i++) {
+        for (int i = 0; i < bannerArrayList.size(); i++) {
                 int drawableId = (i == idx) ? (R.drawable.selecteddots) : (R.drawable.notselected);
             Drawable drawable = res.getDrawable(drawableId);
             dots.get(i).setImageDrawable(drawable);

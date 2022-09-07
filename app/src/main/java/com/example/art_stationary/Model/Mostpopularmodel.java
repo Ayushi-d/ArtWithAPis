@@ -3,12 +3,17 @@ package com.example.art_stationary.Model;
 public class Mostpopularmodel {
     private String title;
     private String price;
-    private int imgid;
+    private String imgid;
+    private String id;
 
-    public Mostpopularmodel(String title, String price, int imgid) {
+    public Mostpopularmodel(String title, String price, String imgid) {
         this.title = title;
         this.price = price;
         this.imgid = imgid;
+    }
+
+    public Mostpopularmodel(){
+
     }
 
     public String getTitle() {
@@ -27,11 +32,19 @@ public class Mostpopularmodel {
         this.price = price;
     }
 
-    public int getImgid() {
+    public String getImgid() {
         return imgid;
     }
 
-    public void setImgid(int imgid) {
+    public void setImgid(String imgid) {
         this.imgid = imgid;
+    }
+
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String imgid) {
+        this.id = id;
     }
 }

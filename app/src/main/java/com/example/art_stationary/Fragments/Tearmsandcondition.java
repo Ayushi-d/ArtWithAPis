@@ -1,5 +1,7 @@
 package com.example.art_stationary.Fragments;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.content.ContentValues;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +25,13 @@ import com.example.art_stationary.Retrofit.ServiceResponse;
 import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Tearmsandcondition extends Fragment implements ServiceResponse {
    TextView textView;
     ConstraintLayout toolbar;
-    TextView tooltext;
+    TextView tooltext,contentText;
     BottomNavigationView navBar;
     ConstraintLayout img_back;
 
@@ -53,6 +57,7 @@ public class Tearmsandcondition extends Fragment implements ServiceResponse {
         navBar = getActivity().findViewById(R.id.bottomNavigationView);
         navBar.setVisibility(View.GONE);
         textView = view.findViewById(R.id.toolheadtext);
+        contentText = view.findViewById(R.id.contentText);
         textView.setText("Tearms and Condition");
 
         gettearmsandcondition();
@@ -79,7 +84,14 @@ public class Tearmsandcondition extends Fragment implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(ContentValues.TAG, "onServiceResponse: API Response---"+result.toString());
                 if (resCode==200) {
-                    Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    JSONObject data = jsonArray.getJSONObject(0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        contentText.setText(Html.fromHtml(data.optString("content"), Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        contentText.setText(Html.fromHtml(data.optString("content")));
+                    }
                 }
 
 

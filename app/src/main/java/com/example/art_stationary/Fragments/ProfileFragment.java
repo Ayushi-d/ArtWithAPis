@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.art_stationary.Activity.MainActivity;
+import com.example.art_stationary.Activity.Singin;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Retrofit.RetrofitService;
 import com.example.art_stationary.Retrofit.ServiceResponse;
@@ -45,6 +46,8 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
     TextView textaddress;
     BottomNavigationView navBar;
     TextView textname;
+    TextView textcontactus;
+    TextView textLogOut;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -71,21 +74,21 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
         textmyorder = view.findViewById(R.id.textmyorder);
         textaddress = view.findViewById(R.id.textaddress);
         textname = view.findViewById(R.id.textname);
+        textcontactus = view.findViewById(R.id.textcontactus);
+        textLogOut = view.findViewById(R.id.textLogOut);
+        getProfile(PreferenceHelper.getInstance(getActivity()).getid());
 
-
-        getProfile("");
         texttearmsandcondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Gloabal_View.changeFragment(getActivity(), new Tearmsandcondition());
-
             }
         });
+
         textaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gloabal_View.changeFragment(getActivity(), new AddressFragment());
-
+                Gloabal_View.changeFragment(getActivity(), new SavedAddressFragment());
             }
         });
 
@@ -93,7 +96,6 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
             @Override
             public void onClick(View view) {
                 Gloabal_View.changeFragment(getActivity(), new PrivacypolicyFragment());
-
             }
         });
 
@@ -101,7 +103,6 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
             @Override
             public void onClick(View view) {
                 Gloabal_View.changeFragment(getActivity(), new Refundfragment());
-
             }
         });
 
@@ -109,7 +110,6 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
             @Override
             public void onClick(View view) {
                 Gloabal_View.changeFragment(getActivity(), new ChangePasswordFragment());
-
             }
         });
 
@@ -117,15 +117,31 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
             @Override
             public void onClick(View view) {
                 Gloabal_View.changeFragment(getActivity(), new Myorderfragment());
-
             }
         });
 
-        //loginid
+        textcontactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gloabal_View.changeFragment(getActivity(), new ContactUsFragment());
+            }
+        });
 
+        textLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performLogOut();
+            }
+        });
         return view;
     }
 
+    private void performLogOut(){
+        PreferenceHelper.getInstance(getActivity()).setid("");
+        Intent intent = new Intent(getActivity(), Singin.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
 
     private void getProfile(String name) {
         List<MultipartBody.Part> data = new ArrayList<>();
@@ -143,9 +159,9 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
                     JSONObject output = jsonObject.getJSONObject("output");
                     JSONArray jsonArray =  output.getJSONArray("data");
                     JSONObject data = jsonArray.getJSONObject(0);
+                    textname.setText(data.optString("firstname")+data.optString("lastname"));
                     Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

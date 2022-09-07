@@ -4,53 +4,52 @@ import java.util.ArrayList;
 
 public class ExpandedCategroryModel {
 
-    private String name;
-    private int type;
-    private Boolean expand;
-    private ArrayList<SubCategoryModel> subCategoryModels;
+    private String title;
+    private String id;
+    private String parent_id;
+    private ArrayList<SubCategoryModel> subcategories;
 
     public ExpandedCategroryModel() {
 
     }
 
-    public ExpandedCategroryModel(String name, int type, Boolean expand, ArrayList<SubCategoryModel> subCategoryModels) {
-        this.name = name;
-        this.type = type;
-        this.expand = expand;
-        this.subCategoryModels = subCategoryModels;
+    public ExpandedCategroryModel(String title, String id, String parent_id, ArrayList<SubCategoryModel> subcategories) {
+        this.title = title;
+        this.id = id;
+        this.parent_id = parent_id;
+        this.subcategories = subcategories;
     }
 
-
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getType() {
-        return type;
+    public String getId() {
+        return id;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Boolean getExpand() {
-        return expand;
+    public String getParent_id() {
+        return parent_id;
     }
 
-    public void setExpand(Boolean expand) {
-        this.expand = expand;
+    public void setParent_id(String parent_id) {
+        this.parent_id = parent_id;
     }
 
-    public ArrayList<SubCategoryModel> getSubCategoryModels() {
-        return subCategoryModels;
+    public ArrayList<SubCategoryModel> getSubcategories() {
+        return subcategories;
     }
 
-    public void setSubCategoryModels(ArrayList<SubCategoryModel> subCategoryModels) {
-        this.subCategoryModels = subCategoryModels;
+    public void setSubcategories(ArrayList<SubCategoryModel> subcategories) {
+        this.subcategories = subcategories;
     }
 }
 

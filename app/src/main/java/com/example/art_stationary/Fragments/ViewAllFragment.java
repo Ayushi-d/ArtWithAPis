@@ -1,5 +1,7 @@
 package com.example.art_stationary.Fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,24 +10,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.art_stationary.Adapter.Gridhomeadapter;
 import com.example.art_stationary.Adapter.Searchadapter;
 import com.example.art_stationary.Adapter.Viewalladapter;
+import com.example.art_stationary.Model.BannerModel;
+import com.example.art_stationary.Model.BrandModel;
+import com.example.art_stationary.Model.Mostpopularmodel;
+import com.example.art_stationary.Model.Recyclerhomemodel;
 import com.example.art_stationary.Model.Searchmodel;
 import com.example.art_stationary.Model.Viewallmodel;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Retrofit.RetrofitService;
+import com.example.art_stationary.Retrofit.ServiceResponse;
+import com.example.art_stationary.Retrofit.ServiceUrls;
+import com.example.art_stationary.Utils.Gloabal_View;
+import com.example.art_stationary.Utils.PreferenceHelper;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MultipartBody;
 
 
-public class ViewAllFragment extends Fragment {
+public class ViewAllFragment extends Fragment implements ServiceResponse {
     SwipeRefreshLayout viewall_list;
     RecyclerView viewall_recyclerlist;
-    private ArrayList<Viewallmodel> viewallarraylist;
-
+    private ArrayList<Recyclerhomemodel> viewallarraylist;
+    Viewalladapter viewalladapter;
     public ViewAllFragment() {
         // Required empty public constructor
     }
@@ -43,26 +63,29 @@ public class ViewAllFragment extends Fragment {
         View v =inflater.inflate(R.layout.fragment_view_all, container, false);
         viewall_list = v.findViewById(R.id.viewall_list);
         viewall_recyclerlist = v.findViewById(R.id.viewall_recyclerlist);
+
+        if (getArguments().getString("brandid").isEmpty()){
+            getAllProducts();
+        }else{
+            String brandID = getArguments().getString("brandid");
+            getProductByBrand(brandID);
+        }
+
         viewallarraylist=new ArrayList<>();
 
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-        viewallarraylist.add(new Viewallmodel("Bic Multi Color Ballpoint PensDress","15.000 KWD",R.drawable.custombrands));
-
-        Viewalladapter viewalladapter=new Viewalladapter(viewallarraylist,getActivity());
+        viewalladapter=new Viewalladapter(viewallarraylist,getActivity());
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getActivity(),2);
-
         viewall_recyclerlist.setLayoutManager(linearLayoutManager);
+        viewalladapter.setOnItemClickListener(new Viewalladapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("prodid", viewallarraylist.get(position).getid());
+                ItemFragment itemFragment = new ItemFragment();
+                itemFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), itemFragment);
+            }
+        });
         viewall_recyclerlist.setAdapter(viewalladapter);
 
         viewall_list.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -72,5 +95,76 @@ public class ViewAllFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    private void getAllProducts() {
+        new RetrofitService(getContext(), ServiceUrls.HOMEAPI,
+                1, 1, this).callService(true);
+    }
+
+    private void getProductByBrand(String brandId) {
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("brandid",brandId));
+        new RetrofitService(getActivity(), ServiceUrls.GETPRODUCTSBYBRAND, 2, 2, data, this)
+                .callService(true);
+    }
+
+    @Override
+    public void onServiceResponse(String result, int requestCode, int resCode) {
+        if (requestCode == 1) {
+            try {
+                if (resCode==200) {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    Log.d(TAG, "onServiceResponse: Outpuut Response---"+output.toString());
+
+                    JSONArray newArrivalsArray =  output.getJSONArray("newarrivals");
+                    for (int i = 0; i < newArrivalsArray.length(); i++){
+                        JSONObject data = newArrivalsArray.optJSONObject(i);
+                        Recyclerhomemodel newArrivalModel = new Recyclerhomemodel();
+                        newArrivalModel.setTitle(data.optString("title"));
+                        newArrivalModel.setPrice(data.optString("price"));
+                        newArrivalModel.setImgid(data.optString("image"));
+                        newArrivalModel.setid(data.optString("id"));
+                        viewallarraylist.add(newArrivalModel);
+                    }
+                    viewalladapter.notifyDataSetChanged();
+                }
+
+
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                if (resCode==200) {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray newArrivalsArray =  output.getJSONArray("data");
+                    for (int i = 0; i < newArrivalsArray.length(); i++){
+                        JSONObject data = newArrivalsArray.optJSONObject(i);
+                        Recyclerhomemodel newArrivalModel = new Recyclerhomemodel();
+                        newArrivalModel.setTitle(data.optString("title"));
+                        newArrivalModel.setPrice(data.optString("price"));
+                        newArrivalModel.setid(data.optString("id"));
+                        JSONArray imagesArr = data.optJSONArray("images");
+                        JSONObject imgObj = imagesArr.optJSONObject(0);
+                        newArrivalModel.setImgid(imgObj.optString("image"));
+                        viewallarraylist.add(newArrivalModel);
+                    }
+                    viewalladapter.notifyDataSetChanged();
+                }
+
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onServiceError(String error, int requestCode, int resCode) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 }

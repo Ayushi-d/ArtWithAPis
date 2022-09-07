@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Model.Cartmodel;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,11 +20,14 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
 
     private ArrayList<Cartmodel> cartmodelArrayList;
     private Context mcontext;
-    private static Gridhomeadapter.ClickListener mOnClickListener;
+    private static ClickListener mOnClickListener;
+    private static ClickListener mOnDeleteClickListener;
+    ArrayList<String> imglist = new ArrayList<>();
 
-    public Mycartadapter(ArrayList<Cartmodel> cartmodelArrayList, Context mcontext) {
+    public Mycartadapter(ArrayList<Cartmodel> cartmodelArrayList, ArrayList<String> imglist, Context mcontext) {
         this.cartmodelArrayList = cartmodelArrayList;
         this.mcontext = mcontext;
+        this.imglist = imglist;
     }
 
     @NonNull
@@ -38,15 +42,49 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
         Cartmodel recyclerData = cartmodelArrayList.get(position);
-        holder.img_item.setImageResource(recyclerData.getImgid());
-        holder.textprice.setText(recyclerData.getTitle());
-        holder.textdescription.setText(recyclerData.getPrice());    }
+        Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+imglist.get(position)).into(holder.img_item);
+        holder.textprice.setText(recyclerData.getPrice());
+        holder.textdescription.setText(recyclerData.getProdname());
+        holder.textcount.setText(recyclerData.getQuantity());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    mOnClickListener.onItemClick(position,v);
+            }
+        });
+
+        holder.img_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnDeleteClickListener.onItemClick(position,v);
+            }
+        });
+
+        holder.img_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = Integer.parseInt(holder.textcount.getText().toString())+1;
+                holder.textcount.setText(""+count);
+            }
+        });
+
+        holder.img_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Integer.parseInt(holder.textcount.getText().toString()) > 1){
+                    int count = Integer.parseInt(holder.textcount.getText().toString())-1;
+                    holder.textcount.setText(""+count);
+                }
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
         // this method returns the size of recyclerview
         return cartmodelArrayList.size();
     }
+
 
     // View Holder Class to handle Recycler View.
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -65,12 +103,18 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
             img_remove = itemView.findViewById(R.id.img_remove);
         }
     }
+
     public interface ClickListener {
         void onItemClick(int position, View v);
     }
 
-    public void setOnItemClickListener(Gridhomeadapter.ClickListener clickListener) {
+    public void setOnItemClickListener(ClickListener clickListener) {
         this.mOnClickListener = clickListener;
     }
+
+    public void setOnDeleteItemClickListener(ClickListener clickListener) {
+        this.mOnDeleteClickListener = clickListener;
+    }
+
 
 }

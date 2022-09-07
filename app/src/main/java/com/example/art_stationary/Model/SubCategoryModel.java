@@ -2,17 +2,21 @@ package com.example.art_stationary.Model;
 
 public class SubCategoryModel {
 
-    private String subtitle;
+    private String title;
 
-    public SubCategoryModel(String subtitle) {
-        this.subtitle = subtitle;
+    public SubCategoryModel() {
+
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public SubCategoryModel(String title) {
+        this.title = title;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

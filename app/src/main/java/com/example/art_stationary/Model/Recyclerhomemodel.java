@@ -3,12 +3,18 @@ package com.example.art_stationary.Model;
 public class Recyclerhomemodel {
     private String title;
     private String price;
-    private int imgid;
+    private String imgid;
+    private String id;
 
-    public Recyclerhomemodel(String title, String price, int imgid) {
+    public Recyclerhomemodel(String title, String price, String imgid, String id) {
         this.title = title;
         this.price = price;
         this.imgid = imgid;
+        this.id = id;
+    }
+
+    public Recyclerhomemodel() {
+
     }
 
     public String getTitle() {
@@ -27,11 +33,21 @@ public class Recyclerhomemodel {
         this.price = price;
     }
 
-    public int getImgid() {
+    public String getImgid() {
         return imgid;
     }
 
-    public void setImgid(int imgid) {
+    public void setImgid(String imgid) {
         this.imgid = imgid;
     }
+
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String id) {
+        this.id = id;
+    }
+
+
 }

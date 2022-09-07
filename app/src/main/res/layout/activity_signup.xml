@@ -30,6 +30,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/image_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

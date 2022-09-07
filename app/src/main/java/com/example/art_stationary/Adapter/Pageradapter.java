@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.art_stationary.Model.IntroModel;
 import com.example.art_stationary.Model.Mostpopularmodel;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,9 @@ public class Pageradapter  extends RecyclerView.Adapter<Pageradapter.RecyclerVie
     public void onBindViewHolder(@NonNull Pageradapter.RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
         IntroModel recyclerData = popularArrayList.get(position);
-        holder.img_book.setImageResource(recyclerData.getImg());
-        holder.tv_bookname.setText(recyclerData.getTitle());
-        holder.tv_pricebook.setText(recyclerData.getDescription());
+        Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerData.getImg()).into(holder.img_book);
+        //        holder.tv_bookname.setText(recyclerData.getTitle());
+//        holder.tv_pricebook.setText(recyclerData.getDescription());
     }
 
     @Override

@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Fragments.AllcategoriesFragment;
 import com.example.art_stationary.Fragments.ItemFragment;
+import com.example.art_stationary.Model.SubCategoryModel;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.Gloabal_View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SecondCatAdapter extends BaseExpandableListAdapter {
@@ -23,6 +25,8 @@ public class SecondCatAdapter extends BaseExpandableListAdapter {
 
 
     List<String[]> data;
+    private ArrayList<SubCategoryModel> subCategoryList;
+
 
     String[] headers;
 
@@ -30,22 +34,23 @@ public class SecondCatAdapter extends BaseExpandableListAdapter {
 
 
 
-    public SecondCatAdapter(Context context, String[] headers, List<String[]> data) {
+    public SecondCatAdapter(Context context, ArrayList<SubCategoryModel> subCategoryList, List<String[]> data) {
         this.context = context;
         this.data = data;
-        this.headers = headers;
+        this.subCategoryList = subCategoryList;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
 
-        return headers[groupPosition];
+        return subCategoryList.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
 
-        return headers.length;
+        return 0;
+       // return subCategoryList.size();
     }
 
     @Override
@@ -60,9 +65,8 @@ public class SecondCatAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.itemsubcategory, null);
         TextView text = (TextView) convertView.findViewById(R.id.child_Title);
-        String groupText = getGroup(groupPosition).toString();
+        String groupText = subCategoryList.get(groupPosition).getTitle();
         text.setText(groupText);
-
         return convertView;
     }
 

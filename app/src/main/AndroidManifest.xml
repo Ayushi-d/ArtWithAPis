@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.Art_Stationary">
         <activity
             android:name=".Activity.ForgotPassword"

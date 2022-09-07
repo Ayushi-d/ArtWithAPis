@@ -3,12 +3,15 @@ package com.example.art_stationary.Model;
 public class IntroModel {
     private String title;
     private String description;
-    private int imgid;
+    private String imageURL;
 
-    public IntroModel(String title, String description, int imgid) {
+    public IntroModel(String title, String description, String imageURL) {
         this.title = title;
         this.description = description;
-        this.imgid = imgid;
+        this.imageURL = imageURL;
+    }
+
+    public IntroModel() {
     }
 
     public String getTitle() {
@@ -27,12 +30,12 @@ public class IntroModel {
         this.description = description;
     }
 
-    public int getImg() {
-        return imgid;
+    public String getImg() {
+        return imageURL;
     }
 
-    public void setImg(int imgid) {
-        this.imgid = imgid;
+    public void setImg(String imageURL) {
+        this.imageURL = imageURL;
     }
 
 }

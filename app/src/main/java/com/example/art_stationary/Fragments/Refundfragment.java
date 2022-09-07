@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.art_stationary.Retrofit.ServiceResponse;
 import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -28,7 +30,7 @@ public class Refundfragment extends Fragment implements ServiceResponse {
     ConstraintLayout toolbar;
     TextView tooltext;
     BottomNavigationView navBar;
-    TextView textView;
+    TextView textView,contentRefundText;
     ConstraintLayout img_back;
 
 
@@ -54,6 +56,7 @@ public class Refundfragment extends Fragment implements ServiceResponse {
         navBar.setVisibility(View.GONE);
         toolbar = view.findViewById(R.id.toolbar);
         textView = view.findViewById(R.id.toolheadtext);
+        contentRefundText = view.findViewById(R.id.contentRefundText);
         textView.setText("Refund policy");
 
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +82,14 @@ public class Refundfragment extends Fragment implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(ContentValues.TAG, "onServiceResponse: API Response---"+result.toString());
                 if (resCode==200) {
-                    Toast.makeText(getContext(), "Sucess", Toast.LENGTH_SHORT).show();
-
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    JSONObject data = jsonArray.getJSONObject(0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        contentRefundText.setText(Html.fromHtml(data.optString("content"), Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        contentRefundText.setText(Html.fromHtml(data.optString("content")));
+                    }
                 }
 
             } catch (Exception e) {

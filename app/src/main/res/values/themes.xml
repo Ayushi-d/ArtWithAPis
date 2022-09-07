@@ -23,6 +23,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
 
         <!-- Customize your theme here. -->
@@ -30,10 +31,12 @@
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinnericon</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/popinsmedium</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>

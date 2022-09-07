@@ -9,6 +9,7 @@
     tools:context=".Activity.Singin">
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/image_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,23 +34,23 @@
         android:id="@+id/et_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:padding="10dp"
-        android:drawableRight="@drawable/emailicon"
-        android:paddingRight="10dp"
-        android:hint="Email"
-        android:text="testing@gmail.com"
-        android:textCursorDrawable="@drawable/drawable_cursor"
-        android:inputType="textEmailAddress"
-        android:singleLine="true"
-        android:textColorHint="@color/headingblack"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="36dp"
         android:background="@drawable/logintextbackground"
+        android:drawableRight="@drawable/emailicon"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/headingblack"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:textSize="14dp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
         app:layout_constraintRight_toRightOf="@id/guidelineright"
-        app:layout_constraintTop_toBottomOf="@id/text_singin"/>
+        app:layout_constraintTop_toBottomOf="@id/text_singin" />
 
     <EditText
         android:id="@+id/et_password"
@@ -60,7 +61,6 @@
         android:textCursorDrawable="@drawable/drawable_cursor"
         android:drawableRight="@drawable/passwordicon"
         android:paddingRight="10dp"
-        android:text="Test@123"
         android:textColorHint="@color/headingblack"
         android:textSize="14dp"
         android:textColor="@color/black"

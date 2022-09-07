@@ -26,6 +26,8 @@
     <string name="prefName">APP_PREFERENCE</string>
     <string name="enterValidEmail">Please Enter a Valid Email</string>
     <string name="prefProfileImage">PROFILE_IMAGE</string>
+    <string name="global_currency">%1$s KWD</string>
+
 
 
     <string name="prefgoogleemail">GEmail</string>

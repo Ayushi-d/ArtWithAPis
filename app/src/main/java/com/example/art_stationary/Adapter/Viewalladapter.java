@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.art_stationary.Model.Recyclerhomemodel;
 import com.example.art_stationary.Model.Viewallmodel;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.RecyclerViewHolder>{
 
-    private ArrayList<Viewallmodel> viewallarraylist;
+    private ArrayList<Recyclerhomemodel> viewallarraylist;
     private Context mcontext;
     private static ClickListener mOnClickListener;
 
-    public Viewalladapter(ArrayList<Viewallmodel> viewallarraylist, Context mcontext) {
+    public Viewalladapter(ArrayList<Recyclerhomemodel> viewallarraylist, Context mcontext) {
         this.viewallarraylist = viewallarraylist;
         this.mcontext = mcontext;
     }
@@ -32,17 +33,17 @@ public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.Recycler
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate Layout
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customviewall, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gridhomelist, parent, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // Set the data to textview and imageview.
-        Viewallmodel viewallmodel = viewallarraylist.get(position);
-        holder.img_book.setImageResource(viewallmodel.getImgid());
-        holder.tv_bookname.setText(viewallmodel.getTitle());
-        holder.tv_pricebook.setText(viewallmodel.getPrice());
+        Recyclerhomemodel recyclerhomemodel = viewallarraylist.get(position);
+        Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerhomemodel.getImgid()).into(holder.img_book);
+        holder.tv_bookname.setText(recyclerhomemodel.getTitle());
+        holder.tv_pricebook.setText(recyclerhomemodel.getPrice());
         holder.img_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

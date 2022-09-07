@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ public class PrivacypolicyFragment extends Fragment implements ServiceResponse {
     BottomNavigationView navBar;
     TextView textView;
     ConstraintLayout toolbar;
-    TextView tooltext;
+    TextView tooltext,contentPrivacyText;
     ConstraintLayout img_back;
 
 
@@ -55,8 +56,8 @@ public class PrivacypolicyFragment extends Fragment implements ServiceResponse {
         navBar = getActivity().findViewById(R.id.bottomNavigationView);
         navBar.setVisibility(View.GONE);
         textView = view.findViewById(R.id.toolheadtext);
+        contentPrivacyText = view.findViewById(R.id.contentPrivacyText);
         textView.setText("Privacy Policy");
-
         getprivacypolicy();
 
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -81,10 +82,15 @@ public class PrivacypolicyFragment extends Fragment implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d(ContentValues.TAG, "onServiceResponse: API Response---"+result.toString());
                 if (resCode==200) {
-                    Toast.makeText(getContext(), "Sucess", Toast.LENGTH_SHORT).show();
-
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    JSONObject data = jsonArray.getJSONObject(0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        contentPrivacyText.setText(Html.fromHtml(data.optString("content"), Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        contentPrivacyText.setText(Html.fromHtml(data.optString("content")));
+                    }
                 }
-
 
             } catch (Exception e) {
                 Log.d(ContentValues.TAG, "onServiceResponse: API Response---"+e.toString());

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Model.Mostpopularmodel;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class Mostpopularadapter extends RecyclerView.Adapter<Mostpopularadapter.
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
         Mostpopularmodel recyclerData = popularArrayList.get(position);
-        holder.img_book.setImageResource(recyclerData.getImgid());
+        Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerData.getImgid()).into(holder.img_book);
         holder.tv_bookname.setText(recyclerData.getTitle());
         holder.tv_pricebook.setText(recyclerData.getPrice());
     }

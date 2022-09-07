@@ -59,6 +59,18 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/empty_text"
+        android:layout_height="wrap_content"
+        android:text="Cart is Empty"
+        android:visibility="gone"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelinevertical"/>
+
 
     <TextView
         android:id="@+id/text_totals"
@@ -101,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="@id/guidelineright"
-        android:text="15.000 KWD"
+        android:text="00.000 KWD"
         android:textSize="16dp"
         android:fontFamily="@font/popinsbold"
         android:textStyle="bold"

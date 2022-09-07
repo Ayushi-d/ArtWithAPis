@@ -1,5 +1,7 @@
 package com.example.art_stationary.Activity;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,17 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.art_stationary.Adapter.Pageradapter;
+import com.example.art_stationary.Retrofit.RetrofitService;
+import com.example.art_stationary.Retrofit.ServiceResponse;
+import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.example.art_stationary.Utils.Gloabal_View;
 import com.example.art_stationary.Model.IntroModel;
 import com.example.art_stationary.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class Navigate_dots extends AppCompatActivity {
+public class Navigate_dots extends AppCompatActivity implements ServiceResponse {
     RecyclerView banner_view;
     Button btn_next;
     private ArrayList<IntroModel> recylerIntroList;
@@ -32,13 +41,11 @@ public class Navigate_dots extends AppCompatActivity {
         banner_view = findViewById(R.id.banner_view);
         btn_next = findViewById(R.id.btn_next);
 
-        recylerIntroList = new ArrayList<>();
-        recylerIntroList.add(new IntroModel("Quickly","Donec sodales, ex a vulputate varius, nisi enim maximus ante, a placerat enim sem id.",R.drawable.navigationbookicon));
-        recylerIntroList.add(new IntroModel("Safely","Donec sodales, ex a vulputate varius, nisi enim maximus ante, a placerat enim sem id.",R.drawable.navigationbookicon));
-        recylerIntroList.add(new IntroModel("Easy","Donec sodales, ex a vulputate varius, nisi enim maximus ante, a placerat enim sem id.",R.drawable.navigationbookicon));
-         pageradapter = new Pageradapter(recylerIntroList,this);
-        LinearLayoutManager mostpopularmanager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        getLandingBanners();
 
+        recylerIntroList = new ArrayList<>();
+        pageradapter = new Pageradapter(recylerIntroList,this);
+        LinearLayoutManager mostpopularmanager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(banner_view);
         banner_view.addItemDecoration(new LinePagerIndicatorDecoration());
@@ -79,5 +86,37 @@ public class Navigate_dots extends AppCompatActivity {
 
     }
 
+    public void getLandingBanners(){
+        new RetrofitService(this, ServiceUrls.GETLANDINGBANNER,
+                1, 1, this).callService(true);
+    }
 
+
+    @Override
+    public void onServiceResponse(String result, int requestCode, int resCode) {
+        if (requestCode == 1) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if (resCode==200) {
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray jsonArray =  output.getJSONArray("data");
+                    for (int i =0; i<jsonArray.length(); i++){
+                        JSONObject data = jsonArray.getJSONObject(0);
+                        IntroModel introModel = new IntroModel();
+                        introModel.setImg(data.optString("image"));
+                        recylerIntroList.add(introModel);
+                    }
+                    pageradapter.notifyDataSetChanged();
+                    //Log.d(TAG, "onServiceResponse: data---"+data);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onServiceError(String error, int requestCode, int resCode) {
+
+    }
 }
