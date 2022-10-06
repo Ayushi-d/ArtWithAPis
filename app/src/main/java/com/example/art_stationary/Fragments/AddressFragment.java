@@ -244,7 +244,6 @@ public class AddressFragment extends Fragment implements ServiceResponse {
     @Override
     public void onServiceError(String error, int requestCode, int resCode) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-
     }
 
     class GovernateClass implements AdapterView.OnItemSelectedListener

@@ -266,6 +266,6 @@
         app:layout_constraintGuide_begin="20dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+      </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

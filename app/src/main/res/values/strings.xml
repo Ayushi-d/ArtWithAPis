@@ -15,7 +15,6 @@
     <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string> <!--gray-->
 
 
-
     <string name="prefuserid">ID</string>
     <string name="prefusername">USERNAME</string>
     <string name="prefpropertyid">_ID</string>
@@ -27,7 +26,6 @@
     <string name="enterValidEmail">Please Enter a Valid Email</string>
     <string name="prefProfileImage">PROFILE_IMAGE</string>
     <string name="global_currency">%1$s KWD</string>
-
 
 
     <string name="prefgoogleemail">GEmail</string>

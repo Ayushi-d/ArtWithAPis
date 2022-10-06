@@ -129,7 +129,7 @@
 
 
     <ImageView
-        android:id="@+id/img_apple"
+        android:id="@+id/img_fb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/appleimage"
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="80dp"
         android:src="@drawable/googleimage"
-        app:layout_constraintLeft_toRightOf="@id/img_apple"
+        app:layout_constraintLeft_toRightOf="@id/img_fb"
         app:layout_constraintRight_toRightOf="@id/img_or"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/img_or"/>

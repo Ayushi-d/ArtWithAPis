@@ -52,8 +52,6 @@ public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.Recycler
         });
     }
 
-
-
     @Override
     public int getItemCount() {
         // this method returns the size of recyclerview
@@ -82,8 +80,5 @@ public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.Recycler
     public void setOnItemClickListener(ClickListener clickListener) {
         this.mOnClickListener = clickListener;
     }
-
-
-
 
 }

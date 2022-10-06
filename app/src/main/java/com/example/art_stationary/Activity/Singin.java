@@ -21,6 +21,12 @@ import com.example.art_stationary.Retrofit.ServiceUrls;
 import com.example.art_stationary.Utils.Gloabal_View;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.PreferenceHelper;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -38,7 +44,8 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
     TextView button_signin;
     EditText et_email;
     EditText et_password;
-    ImageView image_back;
+    ImageView image_back,img_google,img_fb;
+    int RC_SIGN_IN = 200;
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -64,6 +71,8 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         image_back = findViewById(R.id.image_back);
+        img_google = findViewById(R.id.img_google);
+        img_fb = findViewById(R.id.img_fb);
         image_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +103,60 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
                 startActivity(forgotintent);
             }
         });
+
+        img_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                googleLoginIn();
+            }
+        });
+
+        img_fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facebookLogIn();
+            }
+        });
+    }
+
+    private void facebookLogIn(){
+
+    }
+
+    private void googleLoginIn(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            Log.d(TAG, "handleSignInResult: detail"+account.getEmail()+account.getDisplayName());
+            socailLogin(account.getDisplayName(),account.getEmail());
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+        }
     }
 
     private boolean validateEmail() {
@@ -136,17 +199,24 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         super.onBackPressed();
     }
 
-    private void getSignin(String StrRegEmail, String StrRegpass) {
+    private void getSignin(String StrRegEmail, String StrRegPass) {
         List<MultipartBody.Part> data = new ArrayList<>();
         data.add(MultipartBody.Part.createFormData("email",StrRegEmail));
-        data.add(MultipartBody.Part.createFormData("password",StrRegpass));
+        data.add(MultipartBody.Part.createFormData("password",StrRegPass));
         new RetrofitService(this, ServiceUrls.LOGIN, 2, 1, data, this)
+                .callService(true);
+    }
+
+    private void socailLogin(String name, String email) {
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("name",name));
+        data.add(MultipartBody.Part.createFormData("email",email));
+        new RetrofitService(this, ServiceUrls.SOCAILLOGIN, 2, 2, data, this)
                 .callService(true);
     }
 
     @Override
     public void onServiceResponse(String result, int requestCode, int resCode) {
-        if (requestCode == 1) {
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
@@ -154,21 +224,14 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
                     JSONArray jsonArray =  output.getJSONArray("data");
                     JSONObject data = jsonArray.getJSONObject(0);
                     Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
-
-                      PreferenceHelper.getInstance(this).setid(data.optString("id"));
-//                    Toast.makeText(this, jsonObject.optString("message"), Toast.LENGTH_SHORT).show();
-
+                    PreferenceHelper.getInstance(this).setid(data.optString("id"));
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                     startActivity(intent);
+                    startActivity(intent);
                     finish();
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
     }
 
     @Override

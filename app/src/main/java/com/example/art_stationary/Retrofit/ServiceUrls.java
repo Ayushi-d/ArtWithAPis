@@ -5,11 +5,13 @@ public class ServiceUrls {
     public static final String REGISTER= "artbookstore/signup";
     public static final String GETLANDINGBANNER= "artbookstore/landingslidebanners";
     public static final String LOGIN= "artbookstore/login";
+    public static final String SOCAILLOGIN= "artbookstore/sociallogin";
     public static final String FORGOT= "artbookstore/forgotpassword";
     public static final String CHANGEPASSWORD= "artbookstore/changepassword";
     public static final String REFUNDPOLICY= "artbookstore/refundpolicy";
     public static final String PRIVACYPOLICY= "artbookstore/privacypolicy";
     public static final String MYPROFILE= "artbookstore/myprofile";
+    public static final String UPDATEPROFILE= "artbookstore/updateprofile";
     public static final String TEARMSANDCONDITION= "artbookstore/termsandcond";
     public static final String HOMEAPI= "artbookstore/homepage";
     public static final String GETPRODUCTSBYBRAND= "artbookstore/getprodsbybrandid";
@@ -17,6 +19,7 @@ public class ServiceUrls {
     public static final String CONTACTUS= "artbookstore/contactus";
     public static final String GETPRODUCTDETAIL= "artbookstore/getproductdetails";
     public static final String ADDTOCART= "artbookstore/addprodtocart";
+    public static final String ADDTOWISHLIST= "artbookstore/addtowishlist";
     public static final String GETCARTITEMS= "artbookstore/itemsincart";
     public static final String DELETECARTITEMS= "artbookstore/deletefromcart";
     public static final String GETGOVERNATES= "artbookstore/getgovernates";
@@ -26,4 +29,6 @@ public class ServiceUrls {
     public static final String DELETEADDRESS= "artbookstore/deleteaddress";
     public static final String GETADRESSBYID= "artbookstore/getaddressbyid";
     public static final String EDITADDRESS= "artbookstore/editaddress";
+    public static final String GETMYWISHLIST= "artbookstore/getmywishlist";
+    public static final String REMOVEFROMWISHLIST= "artbookstore/removefromwishlist";
 }

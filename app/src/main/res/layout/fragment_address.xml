@@ -263,8 +263,6 @@
         app:layout_constraintTop_toBottomOf="@id/et_street"/>
 
 
-
-
     <EditText
         android:id="@+id/et_floorno"
         android:layout_width="0dp"
@@ -301,13 +299,13 @@
     <EditText
         android:id="@+id/et_direction"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:padding="10dp"
         android:hint="Direction"
         android:textColorHint="@color/headingblack"
         android:textSize="14dp"
         android:fontFamily="@font/popinsmedium"
-        android:layout_height="wrap_content"
         android:background="@drawable/logintextbackground"
         app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
         app:layout_constraintRight_toRightOf="@id/guidelineright"

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.UpdateProfileFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinetop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:drawableRight="@drawable/usericon"
+        android:paddingRight="10dp"
+        android:hint="Name"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:textSize="14dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@drawable/usericon"
+        android:paddingRight="10dp"
+        android:enabled="false"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:textSize="14dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/et_name"/>
+
+    <EditText
+        android:id="@+id/et_mobile"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@drawable/usericon"
+        android:paddingRight="10dp"
+        android:hint="Mobile"
+        android:textCursorDrawable="@drawable/drawable_cursor"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/headingblack"
+        android:textSize="14dp"
+        android:background="@drawable/logintextbackground"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/et_email"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_update"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/update"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/buttongreen"
+        android:layout_marginTop="20dp"
+        android:textSize="17dp"
+        android:fontFamily="@font/popinsbold"
+        android:textStyle="bold"
+        android:background="@drawable/curvebuttombackground"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/et_mobile"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

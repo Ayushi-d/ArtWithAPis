@@ -90,8 +90,8 @@ public class CartFragment extends Fragment implements ServiceResponse {
         button_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gloabal_View.changeFragment(getActivity(), new CheckoutFragment());
 
+                Gloabal_View.changeFragment(getActivity(), new CheckoutFragment());
             }
         });
 
@@ -174,8 +174,8 @@ public class CartFragment extends Fragment implements ServiceResponse {
                         cartmodel.setId(cartData.optString("id"));
                         cartmodel.setProdid(cartData.optString("prodid"));
                         JSONArray imageArray = cartData.optJSONArray("images");
-                        JSONObject imagedata = imageArray.optJSONObject(0);
-                        imglst.add(imagedata.optString("image"));
+                        JSONObject imageData = imageArray.optJSONObject(0);
+                        imglst.add(imageData.optString("image"));
                         cartmodelArrayList.add(cartmodel);
                     }
                     mycartadapter.notifyDataSetChanged();

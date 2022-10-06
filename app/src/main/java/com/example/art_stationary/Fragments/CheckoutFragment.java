@@ -99,6 +99,7 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
                 Gloabal_View.changeFragment(getActivity(), addressFragment);
             }
         });
+
         button_paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +107,7 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
 
             }
         });
+
         card_alladdress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

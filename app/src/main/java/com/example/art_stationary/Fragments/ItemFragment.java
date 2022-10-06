@@ -44,7 +44,7 @@ import okhttp3.MultipartBody;
 
 public class ItemFragment extends Fragment implements ServiceResponse {
     ConstraintLayout constraintLayout;
-    ImageView img_back,img_add,img_minus;
+    ImageView img_back,img_add,img_minus,likeButton;
     TextView text_itemname,textprice,textaboutdescription,text_item;
     RecyclerView listcolor;
     Button button_addtocart;
@@ -78,6 +78,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
         img_back = view.findViewById(R.id.img_back);
         img_add = view.findViewById(R.id.img_add);
         img_minus = view.findViewById(R.id.img_minus);
+        likeButton = view.findViewById(R.id.likeButton);
         text_item = view.findViewById(R.id.text_item);
         imageViewPager = view.findViewById(R.id.imageViewPager);
         text_itemname = view.findViewById(R.id.text_itemname);
@@ -141,6 +142,13 @@ public class ItemFragment extends Fragment implements ServiceResponse {
             }
         });
 
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemToWishlist();
+            }
+        });
+
 
         recyclercolorarraylist = new ArrayList<>();
 
@@ -154,7 +162,6 @@ public class ItemFragment extends Fragment implements ServiceResponse {
         listcolor.setAdapter(adapter);
         BottomNavigationView navBar = getActivity().findViewById(R.id.bottomNavigationView);
         navBar.setVisibility(View.GONE);
-
 
         //size list
         sizeArrayList=new ArrayList<>();
@@ -200,6 +207,15 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 .callService(true);
     }
 
+    private void addItemToWishlist(){
+        List<MultipartBody.Part> data = new ArrayList<>();
+        String userID = PreferenceHelper.getInstance(getActivity()).getid();
+        data.add(MultipartBody.Part.createFormData("userid",userID));
+        data.add(MultipartBody.Part.createFormData("prodid",getArguments().getString("prodid")));
+        new RetrofitService(getActivity(), ServiceUrls.ADDTOWISHLIST, 2, 3, data, this)
+                .callService(true);
+    }
+
     private void addItemToCart() {
         List<MultipartBody.Part> data = new ArrayList<>();
         String userID = PreferenceHelper.getInstance(getActivity()).getid();
@@ -231,7 +247,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        }else if (requestCode == 2){
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
@@ -240,6 +256,16 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }else{
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if (resCode==200) {
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    Toast.makeText(getActivity(), "Item added to WishList Successfully", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+
             }
         }
     }
