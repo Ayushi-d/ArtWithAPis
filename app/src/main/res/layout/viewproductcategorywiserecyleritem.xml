@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        android:layout_marginStart="5dp"
+        app:layout_goneMarginTop="5dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/img_book"
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:src="@drawable/custombookimage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/likeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/likeicon"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@id/img_book"
+                app:layout_constraintEnd_toEndOf="@id/img_book"
+                />
+
+            <TextView
+                android:id="@+id/tv_bookname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Stabilo swing cool"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_book"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_pricebook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="10.500 KWD"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:fontFamily="@font/popinsbold"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_bookname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

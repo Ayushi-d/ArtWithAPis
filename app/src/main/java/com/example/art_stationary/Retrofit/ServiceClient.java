@@ -1,5 +1,6 @@
 package com.example.art_stationary.Retrofit;
 
+import com.example.art_stationary.Model.Categories.Example;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
@@ -25,6 +26,11 @@ import retrofit2.http.Url;
 
 
 public interface ServiceClient {
+
+
+    @GET("volley_array.json")
+    Call<Example> getMovies();
+
 
     @GET
     Call<ResponseBody> makeGetRequest( @Url String url);

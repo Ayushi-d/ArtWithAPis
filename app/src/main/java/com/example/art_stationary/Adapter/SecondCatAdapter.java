@@ -11,10 +11,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.example.art_stationary.Fragments.AllcategoriesFragment;
-import com.example.art_stationary.Fragments.ItemFragment;
 import com.example.art_stationary.Model.SubCategoryModel;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.Gloabal_View;
+import com.example.art_stationary.Utils.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +49,8 @@ public class SecondCatAdapter extends BaseExpandableListAdapter {
     @Override
     public int getGroupCount() {
 
-        return 0;
-       // return subCategoryList.size();
+        //return 0;
+       return subCategoryList.size();
     }
 
     @Override
@@ -66,7 +66,14 @@ public class SecondCatAdapter extends BaseExpandableListAdapter {
         convertView = inflater.inflate(R.layout.itemsubcategory, null);
         TextView text = (TextView) convertView.findViewById(R.id.child_Title);
         String groupText = subCategoryList.get(groupPosition).getTitle();
-        text.setText(groupText);
+        String checkingvalue = PreferenceHelper.getInstance(context).getLangauage();
+        if (checkingvalue.equals("ar")){
+            text.setText(subCategoryList.get(groupPosition).getTitlear());
+        }else {
+            text.setText(subCategoryList.get(groupPosition).getTitle());
+
+        }
+//        text.setText(groupText);
         return convertView;
     }
 

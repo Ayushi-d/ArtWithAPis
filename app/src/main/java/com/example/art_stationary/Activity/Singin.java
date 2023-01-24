@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -44,8 +46,9 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
     TextView button_signin;
     EditText et_email;
     EditText et_password;
-    ImageView image_back,img_google,img_fb;
+    ImageView image_back,img_google,img_fb,eyeButton;
     int RC_SIGN_IN = 200;
+    Boolean passwordVisiblity = false;
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -73,10 +76,24 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         image_back = findViewById(R.id.image_back);
         img_google = findViewById(R.id.img_google);
         img_fb = findViewById(R.id.img_fb);
+        eyeButton = findViewById(R.id.eyeButton);
         image_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        eyeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (passwordVisiblity == true){
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    passwordVisiblity = false;
+                }else{
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    passwordVisiblity = true;
+                }
             }
         });
 
@@ -163,10 +180,10 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         String emailInput = et_email.getText().toString().trim();
 
         if (emailInput.isEmpty()) {
-            et_email.setError("Field can't be empty");
+            et_email.setError(this.getText(R.string.emptyFields));
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            et_email.setError("Please enter a valid email address");
+            et_email.setError(this.getText(R.string.invalidEmail));
             return false;
         } else {
             et_email.setError(null);
@@ -177,7 +194,7 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
         String passwordInput = et_password.getText().toString().trim();
 
         if (passwordInput.isEmpty()) {
-            et_password.setError("Field can't be empty");
+            et_password.setError(this.getText(R.string.emptyFields));
             return false;
         } else {
             et_password.setError(null);
@@ -221,15 +238,22 @@ public class Singin extends AppCompatActivity implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
                     JSONObject output = jsonObject.getJSONObject("output");
-                    JSONArray jsonArray =  output.getJSONArray("data");
-                    JSONObject data = jsonArray.getJSONObject(0);
-                    Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
-                    PreferenceHelper.getInstance(this).setid(data.optString("id"));
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    int success = output.optInt("success");
+                    if (success == 0){
+                        Toast.makeText(this, "wrong credentials", Toast.LENGTH_SHORT).show();
+                    }else{
+                        JSONArray jsonArray =  output.getJSONArray("data");
+                        JSONObject data = jsonArray.getJSONObject(0);
+                        Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
+                        PreferenceHelper.getInstance(this).setid(data.optString("id"));
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             } catch (Exception e) {
+                //Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
     }

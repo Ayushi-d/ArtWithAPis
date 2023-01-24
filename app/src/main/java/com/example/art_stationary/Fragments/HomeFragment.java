@@ -49,6 +49,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+
 
 public class HomeFragment extends Fragment implements ServiceResponse {
     ViewPager viewPager;
@@ -61,16 +63,16 @@ public class HomeFragment extends Fragment implements ServiceResponse {
     private final static int NUM_PAGES = 3;
     LinearLayout dotsLayout;
     ImageView imagesearch;
-    TextView text_viewall;
+    TextView text_viewall,text_viewallBrands,text_viewalloffers,text_viewallmostpopular;
     Gridhomeadapter newArrivaladapter;
     ViewPagerAdapter viewPagerAdapter;
     BrandAdpter brandAdpter;
     Mostpopularadapter mostpopularadapter;
-
+    Offeradapter offeradapter;
 
     private ArrayList<Recyclerhomemodel> recyclerDataArrayList;
     private ArrayList<BrandModel> verticalArraylist;
-    private ArrayList<Offermodel> OffersArraylist;
+    private ArrayList<Mostpopularmodel> OffersArraylist;
     private ArrayList<Mostpopularmodel> mostpopularArraylist;
     private ArrayList<BannerModel> bannerArrayList;
 
@@ -96,8 +98,10 @@ public class HomeFragment extends Fragment implements ServiceResponse {
 
        // addDots();
         //Global.instance.showhidebottomNav(view,true);
-
         text_viewall = view.findViewById(R.id.text_viewall);
+        text_viewallBrands = view.findViewById(R.id.text_viewallBrands);
+        text_viewalloffers = view.findViewById(R.id.text_viewalloffers);
+        text_viewallmostpopular = view.findViewById(R.id.text_viewallmostpopular);
         imagesearch = view.findViewById(R.id.imagesearch);
         gridlist = view.findViewById(R.id.gridlist);
         verticallist = view.findViewById(R.id.verticallist);
@@ -111,6 +115,7 @@ public class HomeFragment extends Fragment implements ServiceResponse {
         mostpopularArraylist = new ArrayList<>();
         bannerArrayList = new ArrayList<>();
         getHomePageData();
+        getHomePageOffersProduct();
 
         viewPagerAdapter = new ViewPagerAdapter(getActivity(),bannerArrayList);
         viewPager.setAdapter(viewPagerAdapter);
@@ -157,18 +162,14 @@ public class HomeFragment extends Fragment implements ServiceResponse {
             public void onItemClick(int position, View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("brandid", verticalArraylist.get(position).getid());
+                bundle.putString("viewAllID","");
                 ViewAllFragment viewAllFragment = new ViewAllFragment();
                 viewAllFragment.setArguments(bundle);
                 Gloabal_View.changeFragment(getActivity(), viewAllFragment);
             }
         });
 
-        // added data to Offer array list
-        OffersArraylist.add(new Offermodel(R.drawable.offerplaceholder));
-        OffersArraylist.add(new Offermodel(R.drawable.custombookimage));
-        OffersArraylist.add(new Offermodel(R.drawable.offerplaceholder));
-        OffersArraylist.add(new Offermodel(R.drawable.custombookimage));
-        Offeradapter offeradapter = new Offeradapter(OffersArraylist, getActivity());
+        offeradapter = new Offeradapter(OffersArraylist, getActivity());
         LinearLayoutManager offermanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         Offerslist.setLayoutManager(offermanager);
         Offerslist.setAdapter(offeradapter);
@@ -179,17 +180,79 @@ public class HomeFragment extends Fragment implements ServiceResponse {
         mostpopularlist.setLayoutManager(mostpopularmanager);
         mostpopularlist.setAdapter(mostpopularadapter);
 
+        mostpopularadapter.setOnItemClickListener(new Mostpopularadapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("prodid", mostpopularArraylist.get(position).getid());
+                ItemFragment itemFragment = new ItemFragment();
+                itemFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), itemFragment);
+            }
+        });
+
+
+        offeradapter.setOnItemClickListener(new Offeradapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("prodid", OffersArraylist.get(position).getid());
+                ItemFragment itemFragment = new ItemFragment();
+                itemFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), itemFragment);
+            }
+        });
+
 
         text_viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
+                bundle.putString("viewAllID","newArrivals");
                 bundle.putString("brandid", "");
                 ViewAllFragment viewAllFragment = new ViewAllFragment();
                 viewAllFragment.setArguments(bundle);
                 Gloabal_View.changeFragment(getActivity(), viewAllFragment);
             }
         });
+
+        text_viewallBrands.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("brandid", "");
+                bundle.putString("viewAllID","brands");
+                ViewAllFragment viewAllFragment = new ViewAllFragment();
+                viewAllFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), viewAllFragment);
+            }
+        });
+
+        text_viewallmostpopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("brandid", "");
+                bundle.putString("viewAllID","mostPopular");
+                ViewAllFragment viewAllFragment = new ViewAllFragment();
+                viewAllFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), viewAllFragment);
+            }
+        });
+
+        text_viewalloffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("brandid", "");
+                bundle.putString("viewAllID","offers");
+                ViewAllFragment viewAllFragment = new ViewAllFragment();
+                viewAllFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), viewAllFragment);
+            }
+        });
+
+
         imagesearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,6 +267,12 @@ public class HomeFragment extends Fragment implements ServiceResponse {
                 1, 1, this).callService(true);
     }
 
+    private void getHomePageOffersProduct() {
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("type","offerprods"));
+        new RetrofitService(getContext(), ServiceUrls.GETPRODUCTBYOFFER,
+                2, 2,data, this).callService(true);
+    }
 
     @Override
     public void onServiceResponse(String result, int requestCode, int resCode) {
@@ -231,6 +300,7 @@ public class HomeFragment extends Fragment implements ServiceResponse {
                         newArrivalModel.setPrice(data.optString("price"));
                         newArrivalModel.setImgid(data.optString("image"));
                         newArrivalModel.setid(data.optString("id"));
+                        newArrivalModel.setTittlear(data.optString("titlear"));
                         recyclerDataArrayList.add(newArrivalModel);
                     }
                     newArrivaladapter.notifyDataSetChanged();
@@ -253,12 +323,36 @@ public class HomeFragment extends Fragment implements ServiceResponse {
                         mostpopularmodel.setPrice(data.optString("price"));
                         mostpopularmodel.setImgid(data.optString("image"));
                         mostpopularmodel.setid(data.optString("id"));
+                        mostpopularmodel.setTitlear(data.optString("titlear"));
                         mostpopularArraylist.add(mostpopularmodel);
                     }
                     mostpopularadapter.notifyDataSetChanged();
 
                 }
 
+
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                if (resCode==200) {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray popularArray =  output.getJSONArray("data");
+                    for (int i = 0; i < popularArray.length(); i++){
+                        JSONObject data = popularArray.optJSONObject(i);
+                        Mostpopularmodel mostpopularmodel = new Mostpopularmodel();
+                        mostpopularmodel.setTitle(data.optString("title"));
+                        mostpopularmodel.setPrice(data.optString("price"));
+                        mostpopularmodel.setImgid(data.optString("image"));
+                        mostpopularmodel.setid(data.optString("id"));
+                        mostpopularmodel.setTitlear(data.optString("titlear"));
+                        OffersArraylist.add(mostpopularmodel);
+                    }
+                    offeradapter.notifyDataSetChanged();
+                }
 
             } catch (Exception e) {
                 Log.d(TAG, "onServiceResponse: API Error---"+e.toString());

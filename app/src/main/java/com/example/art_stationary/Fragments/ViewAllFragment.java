@@ -64,8 +64,10 @@ public class ViewAllFragment extends Fragment implements ServiceResponse {
         viewall_list = v.findViewById(R.id.viewall_list);
         viewall_recyclerlist = v.findViewById(R.id.viewall_recyclerlist);
 
-        if (getArguments().getString("brandid").isEmpty()){
+        if (getArguments().getString("brandid").isEmpty() && !getArguments().get("viewAllID").equals("offers")){
             getAllProducts();
+        }else if (getArguments().get("viewAllID").equals("offers")){
+            getHomePageOffersProduct();
         }else{
             String brandID = getArguments().getString("brandid");
             getProductByBrand(brandID);
@@ -79,11 +81,20 @@ public class ViewAllFragment extends Fragment implements ServiceResponse {
         viewalladapter.setOnItemClickListener(new Viewalladapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("prodid", viewallarraylist.get(position).getid());
-                ItemFragment itemFragment = new ItemFragment();
-                itemFragment.setArguments(bundle);
-                Gloabal_View.changeFragment(getActivity(), itemFragment);
+                if (getArguments().getString("viewAllID") == "brands"){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("brandid", viewallarraylist.get(position).getid());
+                    bundle.putString("viewAllID","");
+                    ViewAllFragment viewAllFragment = new ViewAllFragment();
+                    viewAllFragment.setArguments(bundle);
+                    Gloabal_View.changeFragment(getActivity(), viewAllFragment);
+                }else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("prodid", viewallarraylist.get(position).getid());
+                    ItemFragment itemFragment = new ItemFragment();
+                    itemFragment.setArguments(bundle);
+                    Gloabal_View.changeFragment(getActivity(), itemFragment);
+                }
             }
         });
         viewall_recyclerlist.setAdapter(viewalladapter);
@@ -109,6 +120,13 @@ public class ViewAllFragment extends Fragment implements ServiceResponse {
                 .callService(true);
     }
 
+    private void getHomePageOffersProduct() {
+        List<MultipartBody.Part> data = new ArrayList<>();
+        data.add(MultipartBody.Part.createFormData("type","offerprods"));
+        new RetrofitService(getContext(), ServiceUrls.GETPRODUCTBYOFFER,
+                2, 3,data, this).callService(true);
+    }
+
     @Override
     public void onServiceResponse(String result, int requestCode, int resCode) {
         if (requestCode == 1) {
@@ -117,8 +135,16 @@ public class ViewAllFragment extends Fragment implements ServiceResponse {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONObject output = jsonObject.getJSONObject("output");
                     Log.d(TAG, "onServiceResponse: Outpuut Response---"+output.toString());
+                    JSONArray newArrivalsArray = new JSONArray();
+                    if (getArguments().getString("viewAllID") == "newArrivals"){
+                        newArrivalsArray  =  output.getJSONArray("newarrivals");
 
-                    JSONArray newArrivalsArray =  output.getJSONArray("newarrivals");
+                    }else if (getArguments().getString("viewAllID") == "brands"){
+                        newArrivalsArray  =  output.getJSONArray("brands");
+
+                    }else if (getArguments().getString("viewAllID") == "mostPopular"){
+                        newArrivalsArray  =  output.getJSONArray("mostpopular");
+                    }
                     for (int i = 0; i < newArrivalsArray.length(); i++){
                         JSONObject data = newArrivalsArray.optJSONObject(i);
                         Recyclerhomemodel newArrivalModel = new Recyclerhomemodel();
@@ -130,13 +156,33 @@ public class ViewAllFragment extends Fragment implements ServiceResponse {
                     }
                     viewalladapter.notifyDataSetChanged();
                 }
-
-
             } catch (Exception e) {
                 Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
                 e.printStackTrace();
             }
-        }else{
+        } else if (requestCode == 3){
+            try {
+                if (resCode==200) {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject output = jsonObject.getJSONObject("output");
+                    JSONArray offersarray = output.optJSONArray("data");
+                    for (int i = 0; i < offersarray.length(); i++){
+                        JSONObject data = offersarray.optJSONObject(i);
+                        Recyclerhomemodel newArrivalModel = new Recyclerhomemodel();
+                        newArrivalModel.setTitle(data.optString("title"));
+                        newArrivalModel.setPrice(data.optString("price"));
+                        newArrivalModel.setImgid(data.optString("image"));
+                        newArrivalModel.setid(data.optString("id"));
+                        viewallarraylist.add(newArrivalModel);
+                    }
+                    viewalladapter.notifyDataSetChanged();
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "onServiceResponse: API Error---"+e.toString());
+                e.printStackTrace();
+            }
+        }
+        else{
             try {
                 if (resCode==200) {
                     JSONObject jsonObject = new JSONObject(result);

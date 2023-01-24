@@ -30,14 +30,14 @@ import java.util.List;
 
 public class CheckoutFragment extends Fragment implements AdapterView.OnItemSelectedListener {
      TextView txt_edit;
-     ConstraintLayout card_alladdress;
-     Button button_paynow;
-    ConstraintLayout toolbar;
-    TextView tooltext;
-    BottomNavigationView navBar;
-    Spinner timespinner;
-    ConstraintLayout consspinner;
-    ConstraintLayout backimg;
+     ConstraintLayout card_alladdress,noaddrssView;
+     Button button_paynow,button_addAddrs;
+     ConstraintLayout toolbar;
+     TextView tooltext;
+     BottomNavigationView navBar;
+     Spinner timespinner;
+     ConstraintLayout consspinner;
+     ConstraintLayout backimg;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,19 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
         tooltext = toolbar.findViewById(R.id.toolheadtext);
         tooltext.setText("Checkout");
         backimg = toolbar.findViewById(R.id.img_back);
+        noaddrssView = toolbar.findViewById(R.id.noaddrssView);
+        button_addAddrs = view.findViewById(R.id.button_addAddrs);
+
+        button_addAddrs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("addressID","");
+                AddressFragment addressFragment = new AddressFragment();
+                addressFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), addressFragment);            }
+        });
+
         backimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

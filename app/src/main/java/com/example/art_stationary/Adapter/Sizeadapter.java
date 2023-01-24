@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.art_stationary.Model.Colormodel;
+import com.example.art_stationary.Model.CombinationModel;
 import com.example.art_stationary.Model.IntroModel;
 import com.example.art_stationary.Model.Sizemodel;
 import com.example.art_stationary.R;
@@ -24,11 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Sizeadapter extends RecyclerView.Adapter<Sizeadapter.RecyclerViewHolder> {
 
-    private ArrayList<Sizemodel> sizeArrayList;
+    private ArrayList<CombinationModel> sizeArrayList;
     private Context mcontext;
-    int row_index=0;
+    private static ClickListener mOnClickListener;
 
-    public Sizeadapter(ArrayList<Sizemodel> sizeArrayList, Context mcontext) {
+    public Sizeadapter(ArrayList<CombinationModel> sizeArrayList, Context mcontext) {
         this.sizeArrayList = sizeArrayList;
         this.mcontext = mcontext;
     }
@@ -45,27 +46,38 @@ public class Sizeadapter extends RecyclerView.Adapter<Sizeadapter.RecyclerViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
-        Sizemodel sizemodel = sizeArrayList.get(position);
-        holder.textmedium.setText(sizemodel.getSize());
+        CombinationModel combinationModel = sizeArrayList.get(position);
+        holder.textmedium.setText(combinationModel.getSizename());
+
+        if (combinationModel.getSelectedColor()){
+            Drawable drawable = mcontext.getResources().getDrawable(R.drawable.sizebg);
+            holder.backview.setBackground(drawable);
+            holder.textmedium.setTextColor(R.color.white);
+        }else {
+            holder.backview.setBackgroundColor(Color.parseColor("#EEEEEE"));
+            holder.textmedium.setTextColor(R.color.black);
+        }
+
         holder.backview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                row_index=position;
-                notifyDataSetChanged();
+                mOnClickListener.onItemClick(position,view);
+                //row_index=position;
+                //notifyDataSetChanged();
             }
         });
-        if(row_index==position){
-            Drawable drawable = mcontext.getResources().getDrawable(R.drawable.sizebg);
 
-            holder.backview.setBackground(drawable);
-            holder.textmedium.setTextColor(R.color.white);
-        }
-        else
-        {
-            holder.backview.setBackgroundColor(Color.parseColor("#EEEEEE"));
-            holder.textmedium.setTextColor(R.color.black);
-
-        }
+//        if(row_index==position){
+//            Drawable drawable = mcontext.getResources().getDrawable(R.drawable.sizebg);
+//            holder.backview.setBackground(drawable);
+//            holder.textmedium.setTextColor(R.color.white);
+//        }
+//        else
+//        {
+//            holder.backview.setBackgroundColor(Color.parseColor("#EEEEEE"));
+//            holder.textmedium.setTextColor(R.color.black);
+//
+//        }
 
     }
 
@@ -87,4 +99,13 @@ public class Sizeadapter extends RecyclerView.Adapter<Sizeadapter.RecyclerViewHo
             backview = itemView.findViewById(R.id.backview);
         }
     }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.mOnClickListener = clickListener;
+    }
+
 }

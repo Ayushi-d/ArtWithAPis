@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Art_Stationary</string>
+    <string name="signin">تسجيل الدخول</string>
+    <string name="Tooltext">نص الأداة</string>
+    <string name="signup">اشتراك</string>
+    <string name="addtocart">أضف إلى السلة</string>
+    <string name="submit">يُقدِّم</string>
+    <string name="update">تحديث</string>
+    <string name="quickly">بسرعة</string>
+    <string name="abcdeffhdkfgldkghdgppdig">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="donthaveacc">ليس لديك حساب؟<font fgcolor='#003399'>اشتراك</font></string> <!--gray-->
+    <string name="alreadyhaveacc">هل لديك حساب؟ <font fgcolor='#003399'>تسجيل الدخول</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string> <!--gray-->
+    <string name="global_currency">%1$s KWD</string>
+
+
+    <string name="prefuserid">ID</string>
+    <string name="prefusername">USERNAME</string>
+    <string name="prefpropertyid">_ID</string>
+    <string name="preffriendid">F_ID</string>
+    <string name="preftoken">TOKEN</string>
+    <string name="prefemail">Email</string>
+    <string name="prefDefaultValue">APP_DEFAULT</string>
+    <string name="prefName">APP_PREFERENCE</string>
+    <string name="enterValidEmail">Please Enter a Valid Email</string>
+    <string name="prefProfileImage">PROFILE_IMAGE</string>
+
+
+    <string name="prefgoogleemail">GEmail</string>
+    <string name="prefgoogleImage">GOOGLEPROFILE_IMAGE</string>
+    <string name="prefgoogleid">GOOGLEID</string>
+    <string name="prefgooglename">GOOGLENAME</string>
+
+    <string name="preffbemail">FEmail</string>
+    <string name="preffbImage">FPROFILE_IMAGE</string>
+    <string name="preffbid">FID</string>
+    <string name="preffbname">FNAME</string>
+
+    <!--home Fragment<-->
+    <string name="newArrivals">القادمون الجدد</string>
+    <string name="viewAll">مشاهدة الكل</string>
+    <string name="brands">ماركة</string>
+    <string name="offers">عروض</string>
+    <string name="mostPopular">الأكثر شهرة</string>
+
+    <!--langauge scree-->
+    <string name="selectYourLangauage">اختر لغتك</string>
+
+    <!--Auth screens-->
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgotPassword">هل نسيت كلمة السر؟</string>
+    <string name="name">اسم</string>
+    <string name="mobile">التليفون المحمول</string>
+    <string name="confirmPassword">تأكيد كلمة المرور</string>
+    <string name="enterEmail">أدخل البريد الإلكتروني</string>
+
+    <!--myorder Card-->
+    <string name="order">ترتيب- </string>
+    <string name="amount">مقدار- </string>
+    <string name="status">حالة- </string>
+    <string name="dateOrdered">تاريخ أمرت- </string>
+    <string name="getstarted">البدء</string>
+
+    <!--profile Fragment-->
+    <string name="myaddress">عناويني</string>
+    <string name="wishlist">قائمة الرغبات</string>
+    <string name="ternandcond">الأحكام والشروط</string>
+    <string name="privacypolicy">سياسة الخصوصية</string>
+    <string name="refundpolicy">سياسة الاسترجاع</string>
+    <string name="language">لغة</string>
+    <string name="changepass">تغيير كلمة المرور</string>
+    <string name="contactus">اتصل بنا</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="profile">الملف الشخصي</string>
+
+
+
+    <!--cart Fragment-->
+    <string name="totals">المجاميع</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="shipping">شحن</string>
+    <string name="checkout">الدفع</string>
+
+
+    <string name="amounts">مقدار-</string>
+    <string name="dateordered">تاريخ أمرت-</string>
+    <string name="statuss">حالة-</string>
+    <string name="noaddressadded">لم يتم العثور على عنوان مضاف !!</string>
+    <string name="addadress">اضف عنوان</string>
+
+
+    <!--Change Password-->
+    <string name="currentPassword">كلمة المرور الحالي</string>
+    <string name="newPassword">كلمة سر جديدة</string>
+
+
+    <!--Item Fragment-->
+    <string name="selectQuantity">حدد الكمية</string>
+    <string name="selectColor">حدد الألوان</string>
+    <string name="selectSize">أختر الحجم</string>
+    <string name="outOfStock">إنتهى من المخزن</string>
+    <string name="description">وصف</string>
+    <string name="otherProducts">منتجات اخرى</string>
+
+    <!--Errors/Message-->
+    <string name="emptyFields">لا يجوز أن يكون الحقل فارغًا</string>
+    <string name="invalidEmail">يرجى إدخال البريد الإلكتروني الصحيح</string>
+
+
+</resources>

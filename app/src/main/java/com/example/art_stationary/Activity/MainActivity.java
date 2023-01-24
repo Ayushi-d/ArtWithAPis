@@ -4,17 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.art_stationary.Fragments.CartFragment;
-import com.example.art_stationary.Fragments.CategoriesFragment;
+import com.example.art_stationary.Fragments.CategoriesFragment.CategoriesFragment;
 import com.example.art_stationary.Fragments.HomeFragment;
 import com.example.art_stationary.Fragments.ProfileFragment;
 import com.example.art_stationary.Utils.Gloabal_View;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Utils.LocaleHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     BottomNavigationView bottomNavigationView;
@@ -26,13 +31,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Gloabal_View.statusbar(MainActivity.this);
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::onNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
     }
 
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
+    }
 
     HomeFragment firstFragment = new HomeFragment();
     CartFragment secondFragment = new CartFragment();
@@ -87,5 +95,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
 
+    }
+
+    private void SetLocale( String langauge ) {
+        Locale locale = new Locale(langauge);
+        Locale.setDefault(locale);
+        Configuration configuration =  new  Configuration();
+        configuration.setLocale(locale) ;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
     }
 }

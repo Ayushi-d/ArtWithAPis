@@ -25,12 +25,32 @@ public class PreferenceHelper {
         return helper;
     }
 
+    public void setLangauage(String value){
+        preference.edit().putString("false", value).apply();
+
+    }
+
+
+    public String getLangauage(){
+        return preference.getString("false", "");
+    }
+
+    public void setTabvalue(String value){
+        preference.edit().putString("id",value).apply();
+
+    }
+    public String getTabvalue(){
+        return preference.getString("id","");
+    }
+
+
+
     public void setid(String value) {
         preference.edit().putString(mContext.getString(R.string.prefuserid), value).apply();
     }
 
     public String getid() {
-        return preference.getString(mContext.getString(R.string.prefuserid), mContext.getString(R.string.prefDefaultValue));
+        return preference.getString(mContext.getString(R.string.prefuserid), "");
     }
 
     public void setusername(String value) {

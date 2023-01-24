@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Model.Mostpopularmodel;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Utils.PreferenceHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class Mostpopularadapter extends RecyclerView.Adapter<Mostpopularadapter.
 
     private ArrayList<Mostpopularmodel> popularArrayList;
     private Context mcontext;
+    private static ClickListener mOnClickListener;
+
 
     public Mostpopularadapter(ArrayList<Mostpopularmodel> popularArrayList, Context mcontext) {
         this.popularArrayList = popularArrayList;
@@ -39,8 +42,26 @@ public class Mostpopularadapter extends RecyclerView.Adapter<Mostpopularadapter.
         // Set the data to textview and imageview.
         Mostpopularmodel recyclerData = popularArrayList.get(position);
         Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerData.getImgid()).into(holder.img_book);
-        holder.tv_bookname.setText(recyclerData.getTitle());
-        holder.tv_pricebook.setText(recyclerData.getPrice());
+        String checkingvalue = PreferenceHelper.getInstance(mcontext).getLangauage();
+        if (checkingvalue.equals("ar")){
+            holder.tv_bookname.setText(recyclerData.getTitlear());
+            holder.tv_pricebook.setText(recyclerData.getPrice());
+        }else {
+            holder.tv_bookname.setText(recyclerData.getTitle());
+            holder.tv_pricebook.setText(recyclerData.getPrice());
+        }
+
+
+//        holder.tv_bookname.setText(recyclerData.getTitle());
+//
+//
+//        holder.tv_pricebook.setText(recyclerData.getPrice());
+        holder.img_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnClickListener.onItemClick(position,v);
+            }
+        });
     }
 
     @Override
@@ -60,5 +81,13 @@ public class Mostpopularadapter extends RecyclerView.Adapter<Mostpopularadapter.
             tv_pricebook = itemView.findViewById(R.id.tv_pricebook);
             tv_bookname = itemView.findViewById(R.id.tv_bookname);
             img_book = itemView.findViewById(R.id.img_book);        }
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.mOnClickListener = clickListener;
     }
 }

@@ -9,14 +9,13 @@
     android:fillViewport="true"
     tools:context=".Fragments.ItemFragment">
 
-
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back"
             android:elevation="10dp"
-            app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+            app:layout_constraintStart_toStartOf="@id/guidelineleft"
             app:layout_constraintTop_toTopOf="@id/guidelinetop" />
 
 
@@ -27,8 +26,8 @@
         android:background="@android:color/transparent"
         android:layout_marginTop="3dp"
         app:layout_constraintBottom_toBottomOf="@id/guidelinedevide"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
@@ -43,114 +42,69 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/curverec"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:id="@+id/text_itemname"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/grey"
                 android:textStyle="bold"
                 android:fontFamily="@font/popinsbold"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
                 android:text="Felt Tips and Pencils Colouring Set - Pack of 48"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_selectquantity"
-                android:layout_width="200dp"
+                android:id="@+id/textaboutdescription"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/dummytext"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textSize="17dp"
+                android:padding="10dp"
+                android:textCursorDrawable="@drawable/drawable_cursor"
+                android:fontFamily="@font/nutinonormal"
                 android:layout_marginTop="10dp"
-                android:textSize="16dp"
-                android:textColor="@color/headingblack"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/poppins_regular"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:text="Select Quantity"
-                app:layout_constraintTop_toBottomOf="@id/text_itemname" />
-
-            <ImageView
-                android:id="@+id/img_minus"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/text_selectquantity"
-                android:src="@drawable/minusicon"/>
-
-            <TextView
-                android:id="@+id/text_item"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:text="1"
-                android:textColor="@color/black"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/text_selectquantity"
-                app:layout_constraintLeft_toRightOf="@id/img_minus"
-                android:background="@drawable/logintextbackground"/>
-
-            <ImageView
-                android:id="@+id/img_add"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                app:layout_constraintLeft_toRightOf="@id/text_item"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/text_selectquantity"
-                android:src="@drawable/iconadd"/>
-
-            <TextView
-                android:id="@+id/textprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="12.000 KWD"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
-                android:textSize="20dp"
-                android:fontFamily="@font/popinsbold"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/text_selectquantity"/>
+                android:textColor="@color/grey"
+                app:layout_constraintTop_toBottomOf="@+id/text_itemname"/>
 
             <TextView
                 android:id="@+id/textselectcolor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select colors"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="20dp"
+                android:text="@string/selectColor"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
                 android:textSize="16dp"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/headingblack"
-                app:layout_constraintTop_toBottomOf="@+id/textprice"/>
+                app:layout_constraintTop_toBottomOf="@+id/textaboutdescription"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listcolor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintTop_toBottomOf="@id/textselectcolor"/>
 
             <TextView
                 android:id="@+id/textselectsize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="20dp"
+                android:text="@string/selectSize"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
                 android:textSize="16dp"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="20dp"
@@ -161,13 +115,101 @@
                 android:id="@+id/recyclersizrchart"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
                 android:background="@drawable/sizechartimage"
                 app:layout_constraintTop_toBottomOf="@id/textselectsize"
                 />
+
+            <TextView
+                android:id="@+id/text_selectquantity"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/headingblack"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/poppins_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/selectQuantity"
+                app:layout_constraintTop_toBottomOf="@id/recyclersizrchart" />
+
+            <ImageView
+                android:id="@+id/img_minus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/textOutOfStock"
+                android:src="@drawable/minusicon"/>
+
+            <TextView
+                android:id="@+id/text_item"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="1"
+                android:textColor="@color/black"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/textOutOfStock"
+                app:layout_constraintStart_toEndOf="@id/img_minus"
+                android:background="@drawable/logintextbackground"/>
+
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintStart_toEndOf="@id/text_item"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/textOutOfStock"
+                android:src="@drawable/iconadd"/>
+
+            <TextView
+                android:id="@+id/textOutOfStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Out of Stock"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:textSize="20dp"
+                android:fontFamily="@font/popinsbold"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/text_selectquantity"/>
+
+            <TextView
+                android:id="@+id/offerPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:textSize="20dp"
+                android:fontFamily="@font/popinsbold"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:layout_goneMarginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/recyclersizrchart"/>
+
+            <TextView
+                android:id="@+id/textprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:textSize="20dp"
+                android:fontFamily="@font/popinsbold"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/offerPrice"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_addtocart"
@@ -177,44 +219,37 @@
                 android:backgroundTint="@color/buttongreen"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:textSize="17dp"
                 android:fontFamily="@font/popinsbold"
                 android:textStyle="bold"
-                android:layout_marginRight="40dp"
+                android:layout_marginEnd="40dp"
                 android:background="@drawable/curvebuttombackground"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclersizrchart"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textprice"/>
+
 
             <TextView
-                android:id="@+id/textdescription"
-                android:layout_width="wrap_content"
+                android:id="@+id/otherProductText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="20dp"
-                android:textSize="16dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/headingblack"
-                app:layout_constraintTop_toBottomOf="@+id/button_addtocart"/>
+                app:layout_constraintTop_toBottomOf="@+id/button_addtocart"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="@string/otherProducts"/>
 
-            <TextView
-                android:id="@+id/textaboutdescription"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/otherProductsRV"
+                android:layout_width="match_parent"
+                android:padding="10dp"
                 android:layout_height="wrap_content"
-                android:text="@string/dummytext"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="17dp"
-                android:textCursorDrawable="@drawable/drawable_cursor"
-                android:fontFamily="@font/nutinonormal"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/grey"
-                app:layout_constraintTop_toBottomOf="@+id/textdescription"/>
-
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/otherProductText"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -225,8 +260,8 @@
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/likeicon"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/guidelinedevide"

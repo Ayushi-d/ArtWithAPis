@@ -14,8 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineleft"
@@ -43,18 +43,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
         app:layout_constraintBottom_toTopOf="@id/guidelinevertical"
-        app:layout_constraintRight_toRightOf="@id/guidelineright">
+        app:layout_constraintEnd_toEndOf="@id/guidelineright">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cartlist"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+            app:layout_constraintStart_toStartOf="@id/guidelineleft"
             app:layout_constraintBottom_toTopOf="@id/guidelinevertical"
-            app:layout_constraintRight_toRightOf="@id/guidelineright"/>
+            app:layout_constraintEnd_toEndOf="@id/guidelineright"/>
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -66,8 +66,8 @@
         android:text="Cart is Empty"
         android:visibility="gone"
         android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guidelinevertical"/>
 
@@ -76,9 +76,9 @@
         android:id="@+id/text_totals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
         android:layout_marginTop="20dp"
-        android:text="Totals"
+        android:text="@string/totals"
         android:fontFamily="@font/popinsbold"
         android:textSize="22dp"
         android:textStyle="bold"
@@ -90,9 +90,9 @@
         android:id="@+id/text_subtotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
         android:layout_marginTop="20dp"
-        android:text="Sub total"
+        android:text="@string/shipping"
         android:textSize="14dp"
         android:fontFamily="@font/poppins_regular"
         app:layout_constraintTop_toBottomOf="@id/text_totals"
@@ -101,8 +101,8 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/text_shipping"
-        app:layout_constraintRight_toLeftOf="@id/text_shippingprice"
+        app:layout_constraintStart_toEndOf="@id/text_shipping"
+        app:layout_constraintEnd_toStartOf="@id/text_shippingprice"
         android:src="@drawable/viewline"
         app:layout_constraintTop_toTopOf="@id/text_subtotal"
         app:layout_constraintBottom_toBottomOf="@id/text_subtotal"
@@ -112,7 +112,7 @@
         android:id="@+id/text_subtotalprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         android:text="00.000 KWD"
         android:textSize="16dp"
         android:fontFamily="@font/popinsbold"
@@ -129,9 +129,9 @@
         android:id="@+id/text_shipping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
         android:layout_marginTop="20dp"
-        android:text="Shipping"
+        android:text="@string/subtotal"
         android:textSize="14dp"
         android:fontFamily="@font/poppins_regular"
         app:layout_constraintTop_toBottomOf="@id/text_subtotal"
@@ -140,8 +140,8 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/text_shipping"
-        app:layout_constraintRight_toLeftOf="@id/text_shippingprice"
+        app:layout_constraintStart_toEndOf="@id/text_shipping"
+        app:layout_constraintEnd_toStartOf="@id/text_shippingprice"
         android:src="@drawable/viewline"
         app:layout_constraintTop_toTopOf="@id/text_shipping"
         app:layout_constraintBottom_toBottomOf="@id/text_shipping"
@@ -151,7 +151,7 @@
         android:id="@+id/text_shippingprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         android:text="00.000 KWD"
         android:textSize="16dp"
         android:fontFamily="@font/popinsbold"
@@ -165,16 +165,15 @@
         android:id="@+id/button_checkout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Checkout"
+        android:text="@string/checkout"
         android:textSize="17dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-
         android:fontFamily="@font/popinsbold"
         android:backgroundTint="@color/buttongreen"
         android:background="@drawable/curvebuttombackground"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"/>

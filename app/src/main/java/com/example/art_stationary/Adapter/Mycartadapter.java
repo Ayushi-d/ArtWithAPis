@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.art_stationary.Model.Cartmodel;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Utils.PreferenceHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
     private Context mcontext;
     private static ClickListener mOnClickListener;
     private static ClickListener mOnDeleteClickListener;
+    private static ClickListener mOnPlusClickListener;
+    private static ClickListener mOnMinusClickListener;
     ArrayList<String> imglist = new ArrayList<>();
 
     public Mycartadapter(ArrayList<Cartmodel> cartmodelArrayList, ArrayList<String> imglist, Context mcontext) {
@@ -43,8 +46,13 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
         // Set the data to textview and imageview.
         Cartmodel recyclerData = cartmodelArrayList.get(position);
         Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+imglist.get(position)).into(holder.img_item);
-        holder.textprice.setText(recyclerData.getPrice());
-        holder.textdescription.setText(recyclerData.getProdname());
+        double ItemPrice = Double.parseDouble(recyclerData.getPrice()) * Double.parseDouble(recyclerData.getQuantity()+".000");
+        holder.textprice.setText(ItemPrice+"");
+        if (PreferenceHelper.getInstance(mcontext).getLangauage().equals("ar")){
+            holder.textdescription.setText(recyclerData.getProdname());
+        }else{
+            holder.textdescription.setText(recyclerData.getProdname());
+        }
         holder.textcount.setText(recyclerData.getQuantity());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +71,9 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
         holder.img_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count = Integer.parseInt(holder.textcount.getText().toString())+1;
-                holder.textcount.setText(""+count);
+//                int count = Integer.parseInt(holder.textcount.getText().toString())+1;
+//                holder.textcount.setText(""+count);
+                mOnPlusClickListener.onItemClick(position,v);
             }
         });
 
@@ -72,8 +81,9 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
             @Override
             public void onClick(View v) {
                 if (Integer.parseInt(holder.textcount.getText().toString()) > 1){
-                    int count = Integer.parseInt(holder.textcount.getText().toString())-1;
-                    holder.textcount.setText(""+count);
+//                    int count = Integer.parseInt(holder.textcount.getText().toString())-1;
+//                    holder.textcount.setText(""+count);
+                    mOnMinusClickListener.onItemClick(position,v);
                 }
             }
         });
@@ -116,5 +126,12 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
         this.mOnDeleteClickListener = clickListener;
     }
 
+    public void setOnPlusClickListener(ClickListener clickListener) {
+        this.mOnPlusClickListener = clickListener;
+    }
+
+    public void setmOnMinusClickListener(ClickListener clickListener) {
+        this.mOnMinusClickListener = clickListener;
+    }
 
 }

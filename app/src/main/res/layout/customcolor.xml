@@ -11,12 +11,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <View
+<!--    <View-->
+<!--        android:id="@+id/coloroval"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@drawable/round"/>-->
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/coloroval"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="@color/blue"
-        android:background="@drawable/round"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="20dp"
+        />
 
 
 </LinearLayout>

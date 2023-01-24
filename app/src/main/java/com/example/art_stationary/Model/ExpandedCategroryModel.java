@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class ExpandedCategroryModel {
 
     private String title;
+    private String titlear;
     private String id;
     private String parent_id;
     private ArrayList<SubCategoryModel> subcategories;
+
 
     public ExpandedCategroryModel() {
 
@@ -18,6 +20,14 @@ public class ExpandedCategroryModel {
         this.id = id;
         this.parent_id = parent_id;
         this.subcategories = subcategories;
+    }
+
+    public String getTitlear() {
+        return titlear;
+    }
+
+    public void setTitlear(String titlear) {
+        this.titlear = titlear;
     }
 
     public String getTitle() {

@@ -85,7 +85,7 @@ public class ContactUsFragment extends Fragment implements ServiceResponse {
     private void hitContactUs() {
         List<MultipartBody.Part> data = new ArrayList<>();
         data.add(MultipartBody.Part.createFormData("name",et_name.getText().toString()));
-        data.add(MultipartBody.Part.createFormData("mobile",et_mobile.getText().toString()));
+        data.add(MultipartBody.Part.createFormData("mobile",et_codemobile.getText().toString()+et_mobile.getText().toString()));
         data.add(MultipartBody.Part.createFormData("message",et_message.getText().toString()));
         new RetrofitService(getActivity(), ServiceUrls.CONTACTUS, 2, 1, data, this)
                 .callService(true);

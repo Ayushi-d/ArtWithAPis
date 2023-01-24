@@ -11,8 +11,8 @@
         layout="@layout/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -42,8 +42,8 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:padding="10dp"
-        android:drawableRight="@drawable/usericon"
-        android:paddingRight="10dp"
+        android:drawableEnd="@drawable/usericon"
+        android:paddingEnd="10dp"
         android:hint="Name"
         android:textCursorDrawable="@drawable/drawable_cursor"
         android:inputType="text"
@@ -53,8 +53,8 @@
         android:textColorHint="@color/headingblack"
         android:textSize="14dp"
         android:background="@drawable/logintextbackground"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <EditText
@@ -63,8 +63,8 @@
         android:layout_height="50dp"
         android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:drawableRight="@drawable/usericon"
-        android:paddingRight="10dp"
+        android:drawableEnd="@drawable/usericon"
+        android:paddingEnd="10dp"
         android:enabled="false"
         android:textCursorDrawable="@drawable/drawable_cursor"
         android:inputType="text"
@@ -74,8 +74,8 @@
         android:textColorHint="@color/headingblack"
         android:textSize="14dp"
         android:background="@drawable/logintextbackground"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/et_name"/>
 
     <EditText
@@ -84,8 +84,8 @@
         android:layout_height="50dp"
         android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:drawableRight="@drawable/usericon"
-        android:paddingRight="10dp"
+        android:drawableEnd="@drawable/usericon"
+        android:paddingEnd="10dp"
         android:hint="Mobile"
         android:textCursorDrawable="@drawable/drawable_cursor"
         android:inputType="text"
@@ -95,8 +95,8 @@
         android:textColorHint="@color/headingblack"
         android:textSize="14dp"
         android:background="@drawable/logintextbackground"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/et_email"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -111,8 +111,8 @@
         android:fontFamily="@font/popinsbold"
         android:textStyle="bold"
         android:background="@drawable/curvebuttombackground"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/et_mobile"/>
 
 

@@ -58,6 +58,7 @@ public class CartFragment extends Fragment implements ServiceResponse {
      ArrayList<String> imglst = new ArrayList<>();
      int postionRemoved;
      double subTotalPrice;
+     int quantity;
 
     private ArrayList<Cartmodel> cartmodelArrayList;
     @Override
@@ -118,24 +119,51 @@ public class CartFragment extends Fragment implements ServiceResponse {
             }
         });
 
+        mycartadapter.setmOnMinusClickListener(new Mycartadapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                updateQty(cartmodelArrayList.get(position).getId(),"-1");
+
+            }
+        });
+
+        mycartadapter.setOnPlusClickListener(new Mycartadapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                   updateQty(cartmodelArrayList.get(position).getId(),"1");
+            }
+        });
+
         mycartadapter.setOnDeleteItemClickListener(new Mycartadapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
               //  Log.d(TAG, "onItemClick: ---"+cartmodelArrayList.get(position).getCartID());
                 postionRemoved = position;
-                deleteCartItems(cartmodelArrayList.get(position).getId());
+                deleteCartItems(cartmodelArrayList.get(position).getCartID());
             }
         });
+
         cartlist.setAdapter(mycartadapter);
 
         swipe_list.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                getCartItems();
                 swipe_list.setRefreshing(false);
             }
         });
 
         return view;
+    }
+
+    private void updateQty(String cartId, String quantity){
+        List<MultipartBody.Part> data = new ArrayList<>();
+        Log.d(TAG, "updateQty: carid"+cartId+"-----q"+quantity);
+        data.add(MultipartBody.Part.createFormData("cartid",cartId));
+        data.add(MultipartBody.Part.createFormData("quantity",quantity));
+        new RetrofitService(getActivity(), ServiceUrls.UPDATECARTQTY, 2, 3, data, this)
+                .callService(true);
     }
 
     private void getCartItems() {
@@ -148,6 +176,7 @@ public class CartFragment extends Fragment implements ServiceResponse {
 
     private void deleteCartItems(String cartID) {
         List<MultipartBody.Part> data = new ArrayList<>();
+        Log.d(TAG, "onServiceResponse: cartID---"+cartID);
         data.add(MultipartBody.Part.createFormData("cartid",cartID));
         new RetrofitService(getActivity(), ServiceUrls.DELETECARTITEMS, 2, 2, data, this)
                 .callService(true);
@@ -160,6 +189,7 @@ public class CartFragment extends Fragment implements ServiceResponse {
                 JSONObject jsonObject = new JSONObject(result);
                 if (resCode==200) {
                     cartmodelArrayList.clear();
+                    imglst.clear();
                     JSONObject output = jsonObject.getJSONObject("output");
                     JSONArray jsonArray =  output.getJSONArray("data");
                     text_subtotalprice.setText(getString(R.string.global_currency,output.optString("subtotal")));
@@ -169,6 +199,7 @@ public class CartFragment extends Fragment implements ServiceResponse {
                         cartmodel.setProdname(cartData.optString("prodname"));
                         cartmodel.setPrice(cartData.optString("product_price"));
                         cartmodel.setQuantity(cartData.optString("quantity"));
+                        quantity = Integer.parseInt(cartData.optString("quantity"));
                         subTotalPrice = subTotalPrice + Double.parseDouble(cartData.optString("product_price"));
                         cartmodel.setCartID(cartData.optString("cartid"));
                         cartmodel.setId(cartData.optString("id"));
@@ -192,7 +223,11 @@ public class CartFragment extends Fragment implements ServiceResponse {
         }
         else if (requestCode == 2){
             if (resCode==200) {
-                Log.d(TAG, "onServiceResponse: postion---"+postionRemoved);
+                Log.d(TAG, "onServiceResponse: postionremoved---"+postionRemoved);
+                getCartItems();
+            }
+        }else{
+            if (resCode==200) {
                 getCartItems();
             }
         }

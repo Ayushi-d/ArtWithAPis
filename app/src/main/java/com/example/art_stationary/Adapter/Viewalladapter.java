@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.RecyclerViewHolder>{
@@ -44,7 +45,7 @@ public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.Recycler
         Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+recyclerhomemodel.getImgid()).into(holder.img_book);
         holder.tv_bookname.setText(recyclerhomemodel.getTitle());
         holder.tv_pricebook.setText(recyclerhomemodel.getPrice());
-        holder.img_book.setOnClickListener(new View.OnClickListener() {
+        holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnClickListener.onItemClick(position,v);
@@ -64,12 +65,14 @@ public class Viewalladapter extends RecyclerView.Adapter<Viewalladapter.Recycler
 
         private TextView tv_bookname,tv_pricebook;
         private ImageView img_book;
+        private CardView card;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_pricebook = itemView.findViewById(R.id.tv_pricebook);
             tv_bookname = itemView.findViewById(R.id.tv_bookname);
             img_book = itemView.findViewById(R.id.img_book);
+            card = itemView.findViewById(R.id.card);
         }
     }
 

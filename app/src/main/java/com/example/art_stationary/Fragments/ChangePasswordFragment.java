@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
     EditText et_confirmpassword;
     ConstraintLayout img_back;
     Button button_update;
+    ImageView backImg;
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -82,7 +84,11 @@ public class ChangePasswordFragment extends Fragment  implements ServiceResponse
         navBar.setVisibility(View.GONE);
         toolbar = view.findViewById(R.id.toolbar);
         tooltext = toolbar.findViewById(R.id.toolheadtext);
-        tooltext.setText("Change Password");
+        backImg = toolbar.findViewById(R.id.backImg);
+        tooltext.setText(R.string.changepass);
+        if (PreferenceHelper.getInstance(getActivity()).getLangauage()=="ar"){
+            backImg.setScaleX(-1);
+        }
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -31,4 +31,7 @@ public class ServiceUrls {
     public static final String EDITADDRESS= "artbookstore/editaddress";
     public static final String GETMYWISHLIST= "artbookstore/getmywishlist";
     public static final String REMOVEFROMWISHLIST= "artbookstore/removefromwishlist";
+    public static final String SEARCH= "artbookstore/searchbyfilter";
+    public static final String GETPRODUCTBYOFFER= "artbookstore/getprodsbyneworpopular";
+    public static final String UPDATECARTQTY= "artbookstore/updatecartqty";
 }

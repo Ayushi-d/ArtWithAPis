@@ -12,10 +12,10 @@
         android:text="BiC Multi Colour Ballpoint PensDress"
         android:textColor="@color/black"
         android:textSize="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintLeft_toRightOf="@id/imagecard"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        android:layout_margin="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/imagecard"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toTopOf="@id/imagecard" />
 
     <TextView
@@ -27,10 +27,10 @@
         android:textColor="@color/blue"
         android:textSize="13dp"
         android:textStyle="bold"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintLeft_toRightOf="@id/imagecard"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        android:layout_margin="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/imagecard"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/textdescription"/>
 
     <TextView
@@ -40,11 +40,11 @@
         android:text="Quantity :"
         android:textColor="@color/black"
         android:textSize="13dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_margin="20dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@id/imagecard"
         android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toRightOf="@id/imagecard"
+        app:layout_constraintStart_toEndOf="@id/imagecard"
          />
 
     <TextView
@@ -55,10 +55,10 @@
         android:text="3"
         android:textColor="@color/black"
         android:textSize="13dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="2dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toRightOf="@id/textquantity"
+        app:layout_constraintStart_toEndOf="@id/textquantity"
         app:layout_constraintBottom_toBottomOf="@id/imagecard" />
 
 
@@ -68,7 +68,7 @@
         android:layout_height="120dp"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,8 +83,8 @@
                 android:padding="10dp"
                 android:src="@drawable/custombookimage"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

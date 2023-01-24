@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -92,6 +93,8 @@ public class AddressFragment extends Fragment implements ServiceResponse {
         tooltext.setText("Address");
         navBar = getActivity().findViewById(R.id.bottomNavigationView);
         navBar.setVisibility(View.GONE);
+
+
 
         if (!getArguments().getString("addressID").isEmpty()){
             addressID = getArguments().getString("addressID");

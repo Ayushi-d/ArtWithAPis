@@ -2,7 +2,10 @@ package com.example.art_stationary.Fragments;
 
 import static android.service.controls.ControlsProviderService.TAG;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,13 +15,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.art_stationary.Activity.MainActivity;
+import com.example.art_stationary.Activity.Select_language;
 import com.example.art_stationary.Activity.Singin;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Retrofit.RetrofitService;
@@ -33,21 +42,24 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.MultipartBody;
 
 
-public class ProfileFragment extends Fragment implements ServiceResponse {
+public class ProfileFragment extends Fragment implements ServiceResponse, View.OnClickListener {
     TextView texttearmsandcondition;
     TextView textprivacypolicy;
     TextView textrefundpolicy;
     TextView textchangepassword;
     TextView textmyorder;
     TextView textaddress;
+    TextView textwishlist;
     BottomNavigationView navBar;
     TextView textname;
     TextView textcontactus;
     TextView textLogOut;
+    TextView textlanguage;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,10 +85,14 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
         textchangepassword = view.findViewById(R.id.textchangepassword);
         textmyorder = view.findViewById(R.id.textmyorder);
         textaddress = view.findViewById(R.id.textaddress);
+        textwishlist = view.findViewById(R.id.textwishlist);
         textname = view.findViewById(R.id.textname);
         textcontactus = view.findViewById(R.id.textcontactus);
         textLogOut = view.findViewById(R.id.textLogOut);
+        textlanguage = view.findViewById(R.id.textlanguage);
         getProfile(PreferenceHelper.getInstance(getActivity()).getid());
+
+        listeners();
 
         texttearmsandcondition.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +143,13 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
             }
         });
 
+        textwishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gloabal_View.changeFragment(getActivity(), new WishlistFragment());
+            }
+        });
+
         textLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,9 +168,16 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
 
     private void getProfile(String name) {
         List<MultipartBody.Part> data = new ArrayList<>();
+        Log.d(TAG, "onServiceResponse: nameeeeeee-----"+name);
+
         data.add(MultipartBody.Part.createFormData("loginid",name));
         new RetrofitService(getContext(), ServiceUrls.MYPROFILE, 2, 1, data, this)
                 .callService(true);
+    }
+
+
+    private void listeners(){
+        textlanguage.setOnClickListener(this);
     }
 
     @Override
@@ -159,7 +189,7 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
                     JSONObject output = jsonObject.getJSONObject("output");
                     JSONArray jsonArray =  output.getJSONArray("data");
                     JSONObject data = jsonArray.getJSONObject(0);
-                    textname.setText(data.optString("firstname")+data.optString("lastname"));
+                    textname.setText(data.optString("firstname"));
                     Log.d(TAG, "onServiceResponse: id---"+data.optString("id"));
                 }
             } catch (Exception e) {
@@ -173,4 +203,16 @@ public class ProfileFragment extends Fragment implements ServiceResponse {
     public void onServiceError(String error, int requestCode, int resCode) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onClick(View v) {
+        if (v==textlanguage){
+            Intent i = new Intent(getActivity(), Select_language.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("comeFrom","Profile");
+            i.putExtras(bundle);
+            startActivity(i);
+        }
+    }
+
 }

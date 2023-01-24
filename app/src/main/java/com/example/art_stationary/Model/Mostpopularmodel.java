@@ -5,15 +5,26 @@ public class Mostpopularmodel {
     private String price;
     private String imgid;
     private String id;
+    private String titlear;
 
-    public Mostpopularmodel(String title, String price, String imgid) {
+
+    public Mostpopularmodel(String title, String price, String imgid,String titlear) {
         this.title = title;
         this.price = price;
         this.imgid = imgid;
+        this.titlear = titlear;
     }
 
     public Mostpopularmodel(){
 
+    }
+
+    public String getTitlear() {
+        return titlear;
+    }
+
+    public void setTitlear(String titlear) {
+        this.titlear = titlear;
     }
 
     public String getTitle() {
@@ -44,7 +55,7 @@ public class Mostpopularmodel {
         return id;
     }
 
-    public void setid(String imgid) {
+    public void setid(String id) {
         this.id = id;
     }
 }

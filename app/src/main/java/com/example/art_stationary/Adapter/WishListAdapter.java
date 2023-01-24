@@ -20,7 +20,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Recycl
 
     private ArrayList<Recyclerhomemodel> wishListArrayList;
     private Context mcontext;
-    private static Viewalladapter.ClickListener mOnClickListener;
+    private static ClickListener mOnClickListener;
+    private static ClickListener mOnImageClickListener;
 
     public WishListAdapter(ArrayList<Recyclerhomemodel> wishListArrayList, Context mcontext) {
         this.wishListArrayList = wishListArrayList;
@@ -45,6 +46,12 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Recycl
             @Override
             public void onClick(View v) {
                 mOnClickListener.onItemClick(position,v);
+            }
+        });
+        holder.img_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnImageClickListener.onItemClick(position,v);
             }
         });
     }
@@ -72,8 +79,14 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Recycl
         void onItemClick(int position, View v);
     }
 
-    public void setOnItemClickListener(Viewalladapter.ClickListener clickListener) {
+    public void setOnItemClickListener(ClickListener clickListener) {
         this.mOnClickListener = clickListener;
     }
+
+    public void setOnClickListener(ClickListener clickListener) {
+        this.mOnImageClickListener = clickListener;
+    }
+
+
 
 }

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.art_stationary.Adapter.Mycartadapter;
@@ -45,10 +46,11 @@ import okhttp3.MultipartBody;
 public class SavedAddressFragment extends Fragment implements ServiceResponse, Serializable {
     RecyclerView savedaddresslist;
     ConstraintLayout toolbar;
-    TextView tooltext;
+    TextView tooltext,plusIcon,NoAddressText;
     BottomNavigationView navBar;
     Savedaddressadapter savedaddressadapter;
     ConstraintLayout img_back;
+    Button button_addNewAddrss;
 
 
     private ArrayList<Savedaddressmodel> savedaddressmodelArrayList;
@@ -70,9 +72,24 @@ public class SavedAddressFragment extends Fragment implements ServiceResponse, S
         img_back = view.findViewById(R.id.img_back);
         toolbar = view.findViewById(R.id.toolbar);
         tooltext = view.findViewById(R.id.toolheadtext);
+        button_addNewAddrss = view.findViewById(R.id.button_addNewAddrss);
+        plusIcon = view.findViewById(R.id.plusIcon);
+        NoAddressText = view.findViewById(R.id.NoAddressText);
         tooltext.setText("Saved Addresss");
-
+        plusIcon.setVisibility(View.VISIBLE);
         getMyAddress();
+
+
+        plusIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("addressID","");
+                AddressFragment addressFragment = new AddressFragment();
+                addressFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), addressFragment);
+            }
+        });
 
         savedaddressmodelArrayList=new ArrayList<>();
         savedaddressadapter = new Savedaddressadapter(savedaddressmodelArrayList,getActivity());
@@ -86,6 +103,16 @@ public class SavedAddressFragment extends Fragment implements ServiceResponse, S
             public void onItemClick(int position, View v) {
                 deleteAddress(savedaddressmodelArrayList.get(position).getId());
             }
+        });
+
+        button_addNewAddrss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("addressID","");
+                AddressFragment addressFragment = new AddressFragment();
+                addressFragment.setArguments(bundle);
+                Gloabal_View.changeFragment(getActivity(), addressFragment);            }
         });
 
         savedaddressadapter.setOnEditItemClickListener(new Mycartadapter.ClickListener() {
@@ -152,8 +179,14 @@ public class SavedAddressFragment extends Fragment implements ServiceResponse, S
             }
             if (savedaddressmodelArrayList.size() == 0){
                 //empty_text.setVisibility(View.VISIBLE);
+                button_addNewAddrss.setVisibility(View.VISIBLE);
+                NoAddressText.setVisibility(View.VISIBLE);
                 savedaddressmodelArrayList.clear();
                 savedaddressadapter.notifyDataSetChanged();
+            }else{
+                button_addNewAddrss.setVisibility(View.GONE);
+                NoAddressText.setVisibility(View.GONE);
+
             }
         }else{
             if (resCode==200) {

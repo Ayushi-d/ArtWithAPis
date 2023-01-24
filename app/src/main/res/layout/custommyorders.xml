@@ -13,8 +13,8 @@
         android:background="@color/white"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,14 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/popinsbold"
                 android:textSize="18dp"
                 android:textColor="@color/newblack"
                 android:layout_marginTop="10dp"
-                android:text="Order-" />
+                android:text="@string/order" />
 
             <TextView
                 android:id="@+id/textordernum"
@@ -46,8 +46,8 @@
                 android:textSize="18dp"
                 android:textColor="@color/newblack"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/tv_order"
-                android:layout_marginLeft="5dp"
+                app:layout_constraintStart_toEndOf="@id/tv_order"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:text="abc" />
 
@@ -57,21 +57,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/tv_statusconfirm"
-                android:layout_marginLeft="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_statusconfirm"
+                android:layout_marginStart="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16dp"
                 android:textColor="#807F7F"
                 android:layout_marginTop="10dp"
-                android:text="Status- " />
+                android:text="" />
 
             <TextView
                 android:id="@+id/tv_statusconfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16dp"
                 android:textColor="@color/red"
@@ -83,22 +83,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_order"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16dp"
                 android:textColor="@color/newgrey"
                 android:layout_marginTop="10dp"
-                android:text="Amount- " />
+                android:text="@string/amounts" />
 
             <TextView
                 android:id="@+id/tv_amountnum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/textordernum"
-                app:layout_constraintLeft_toRightOf="@id/tv_ammount"
-                android:layout_marginLeft="5dp"
+                app:layout_constraintStart_toEndOf="@id/tv_ammount"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/green"
                 android:textSize="16dp"
                 android:fontFamily="@font/poppins_regular"
@@ -111,22 +111,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_ammount"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16dp"
                 android:textColor="@color/newgrey"
                 android:layout_marginTop="10dp"
-                android:text="Date ordered- " />
+                android:text="@string/dateordered" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_amountnum"
-                app:layout_constraintLeft_toRightOf="@id/tv_dateordered"
-                android:layout_marginLeft="5dp"
+                app:layout_constraintStart_toEndOf="@id/tv_dateordered"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/green"
                 android:textSize="16dp"

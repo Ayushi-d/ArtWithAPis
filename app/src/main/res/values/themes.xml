@@ -39,4 +39,11 @@
         <item name="fontFamily">@font/popinsmedium</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
+    <style name="TabLayout_Theme" parent="@style/Theme.Art_Stationary">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="MyTabLayoutTextAppearance2" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

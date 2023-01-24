@@ -5,12 +5,18 @@ public class Recyclerhomemodel {
     private String price;
     private String imgid;
     private String id;
+    private String prodid;
+    private String tittlear;
 
-    public Recyclerhomemodel(String title, String price, String imgid, String id) {
+
+
+    public Recyclerhomemodel(String title, String price, String imgid, String id, String prodid, String tittlear) {
         this.title = title;
         this.price = price;
         this.imgid = imgid;
         this.id = id;
+        this.prodid = prodid;
+        this.tittlear = tittlear;
     }
 
     public Recyclerhomemodel() {
@@ -49,5 +55,18 @@ public class Recyclerhomemodel {
         this.id = id;
     }
 
+    public String getProdid() {
+        return prodid;
+    }
 
+    public void setProdid(String prodid) {
+        this.prodid = prodid;
+    }
+    public String getTittlear() {
+        return tittlear;
+    }
+
+    public void setTittlear(String tittlear) {
+        this.tittlear = tittlear;
+    }
 }

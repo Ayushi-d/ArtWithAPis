@@ -38,4 +38,79 @@
     <string name="preffbid">FID</string>
     <string name="preffbname">FNAME</string>
 
+
+    <!--Navigation_dots-->
+
+    <string name="getstarted">Get Started</string>
+
+
+    <!--home Fragment-->
+    <string name="newArrivals">New Arrivals</string>
+    <string name="viewAll">View All</string>
+    <string name="brands">Brands</string>
+    <string name="offers">Offers</string>
+    <string name="mostPopular">Most Popular</string>
+
+    <!--langauge scree-->
+    <string name="selectYourLangauage">Select your language</string>
+
+    <!--Auth screens-->
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="enterEmail">Enter email</string>
+
+    <!--myorder Card-->
+    <string name="order">Order- </string>
+    <string name="amount">Amount- </string>
+    <string name="status">Status- </string>
+    <string name="dateOrdered">Date ordered- </string>
+
+
+    <!--profile Fragment-->
+    <string name="myaddress">My Addresses</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="ternandcond">Terms and Conditions</string>
+    <string name="privacypolicy">Privacy policy</string>
+    <string name="refundpolicy">Refund policy</string>
+    <string name="language">Language</string>
+    <string name="changepass">Change Password</string>
+    <string name="contactus">Contact us</string>
+    <string name="logout">Log Out</string>
+    <string name="profile">Profile</string>
+
+    <!--cart Fragment-->
+    <string name="totals">Totals</string>
+    <string name="subtotal">Sub total</string>
+    <string name="shipping">Shipping</string>
+    <string name="checkout">Checkout</string>
+
+
+    <string name="amounts">Amount-</string>
+    <string name="dateordered">Date ordered-</string>
+    <string name="statuss">Status- </string>
+    <string name="noaddressadded">No added Address Found!! </string>
+    <string name="addadress">Add Address </string>
+
+    <!--Change Password-->
+    <string name="currentPassword">Current Password</string>
+    <string name="newPassword">New Password-</string>
+
+
+    <!--Item Fragment-->
+    <string name="selectQuantity">Select Quantity</string>
+    <string name="selectColor">Select Colors</string>
+    <string name="selectSize">Select Size</string>
+    <string name="outOfStock">Out of Stock</string>
+    <string name="description">Description</string>
+    <string name="otherProducts">Other Products</string>
+
+    <!--Errors/Message-->
+    <string name="emptyFields">Field can\'t be empty</string>
+    <string name="invalidEmail">Please enter a valid email address</string>
+
+
 </resources>

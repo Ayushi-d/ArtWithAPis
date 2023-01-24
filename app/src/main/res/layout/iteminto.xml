@@ -10,8 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/navigationbookicon"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toTopOf="@id/guidelinetop"
         app:layout_constraintBottom_toBottomOf="@id/guidelinedevide"/>
 
@@ -24,23 +24,23 @@
         android:fontFamily="@font/popinsbold"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/guidelinedevide"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/nav_subheadingtext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/abcdeffhdkfgldkghdgppdig"
         android:textColor="@color/textgrey"
         android:textSize="13dp"
         android:fontFamily="@font/poppins_regular"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@id/nav_headingtext" />
 
     <androidx.constraintlayout.widget.Guideline

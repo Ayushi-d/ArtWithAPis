@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.art_stationary.Model.ExpandedCategroryModel;
 import com.example.art_stationary.Model.SubCategoryModel;
 import com.example.art_stationary.R;
+import com.example.art_stationary.Utils.PreferenceHelper;
 import com.example.art_stationary.Utils.SecondLevelExpandableListView;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class ThreeCatAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 1;
+        return subCategoryList.size();
     }
 
     @Override
@@ -88,8 +89,15 @@ public class ThreeCatAdapter extends BaseExpandableListAdapter {
         convertView = inflater.inflate(R.layout.itemcategory_expanded, null);
         TextView text = (TextView) convertView.findViewById(R.id.tv_lang_name);
         ExpandedCategroryModel expandedCategroryModel = parentCategoryList.get(groupPosition);
+
+        String checkingvalue = PreferenceHelper.getInstance(context).getLangauage();
+        if (checkingvalue.equals("ar")){
+           text.setText(expandedCategroryModel.getTitlear());
+        }else {
+            text.setText(expandedCategroryModel.getTitle());
+
+        }
         subCategoryList = expandedCategroryModel.getSubcategories();
-        text.setText(expandedCategroryModel.getTitle());
         return convertView;
     }
 
@@ -99,30 +107,30 @@ public class ThreeCatAdapter extends BaseExpandableListAdapter {
         final SecondLevelExpandableListView secondLevelELV = new SecondLevelExpandableListView(context);
 
        // SubCategoryModel headers = subCategoryList.get(groupPosition);
-        //String[] headers = secondLevel.get(groupPosition);
+       // String[] headers = secondLevel.get(groupPosition);
 
-//        List<String[]> childData = new ArrayList<>();
-//        HashMap<String, String[]> secondLevelData=data.get(groupPosition);
-//
-//        for(String key : secondLevelData.keySet())
-//        {
-//            childData.add(secondLevelData.get(key));
-//        }
-//
-//        secondLevelELV.setAdapter(new SecondCatAdapter(context, subCategoryList,childData));
-//
-//        secondLevelELV.setGroupIndicator(null);
-//
-//        secondLevelELV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//            int previousGroup = -1;
-//
-//            @Override
-//            public void onGroupExpand(int groupPosition) {
-//                if(groupPosition != previousGroup)
-//                    secondLevelELV.collapseGroup(previousGroup);
-//                previousGroup = groupPosition;
-//            }
-       // });
+        List<String[]> childData = new ArrayList<>();
+        HashMap<String, String[]> secondLevelData=data.get(groupPosition);
+
+        for(String key : secondLevelData.keySet())
+        {
+            childData.add(secondLevelData.get(key));
+        }
+
+        secondLevelELV.setAdapter(new SecondCatAdapter(context, subCategoryList,childData));
+
+        secondLevelELV.setGroupIndicator(null);
+
+        secondLevelELV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if(groupPosition != previousGroup)
+                    secondLevelELV.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
+            }
+        });
 
         return secondLevelELV;
     }

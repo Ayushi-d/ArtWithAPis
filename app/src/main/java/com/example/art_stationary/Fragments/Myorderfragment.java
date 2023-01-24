@@ -71,7 +71,6 @@ public class Myorderfragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Gloabal_View.changeFragment(getActivity(), new OrdernoFragment());
-
             }
         });
         Myorderslist.setAdapter(myorderadapter);
