@@ -1,8 +1,11 @@
 package com.example.art_stationary.Adapter;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +49,6 @@ public class Colorhomeadapter extends RecyclerView.Adapter<Colorhomeadapter.Recy
         // Set the data to textview and imageview.
         CombinationModel colormodel = Colorarray.get(position);
         holder.coloroval.setCardBackgroundColor(Color.parseColor(colormodel.getColorCode()));
-
         if (colormodel.getSelectedColor()){
             holder.coloroval.setStrokeWidth(14);
             holder.coloroval.setStrokeColor(Color.GRAY);

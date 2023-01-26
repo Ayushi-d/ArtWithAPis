@@ -39,7 +39,8 @@ public class CombinationModel {
     }
 
     public void setColorCode(String colorcode) {
-        this.colorcode = colorcode;
+
+        this.colorcode = colorcode != "null" ? colorcode : "#FFFFFF";
     }
 
     public String getColorid() {

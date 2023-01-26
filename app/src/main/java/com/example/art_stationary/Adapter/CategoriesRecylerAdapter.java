@@ -1,5 +1,6 @@
 package com.example.art_stationary.Adapter;
 
+import android.graphics.Color;
 import android.media.Image;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.SingleLineTransformationMethod;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +19,7 @@ import com.example.art_stationary.Adapter.CategoriesAdapter.SubCategoriesRecyler
 import com.example.art_stationary.Model.Categories.Datum;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.PreferenceHelper;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -39,6 +42,7 @@ public class CategoriesRecylerAdapter extends RecyclerView.Adapter<CategoriesRec
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.categorieslist_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
+        //#9BFFC5
         return viewHolder;
     }
 
@@ -49,6 +53,9 @@ public class CategoriesRecylerAdapter extends RecyclerView.Adapter<CategoriesRec
 
         String checkingvalue = PreferenceHelper.getInstance(activity).getLangauage();
 
+       // holder.parentView.setBackgroundColor( position % 2 == 0 ? 0xff9BFFC5 : 0xffFFFFFF);
+        holder.parentView.setCardBackgroundColor(position % 2 == 0 ? 0xff9BFFC5 : 0xffFFFFFF);
+
         if (checkingvalue.equals("ar")){
             holder.textView.setText(data.get(position).getTitlear());
         }else {
@@ -56,35 +63,52 @@ public class CategoriesRecylerAdapter extends RecyclerView.Adapter<CategoriesRec
 
         }
 
-        holder.imgarrow.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (vallue) {
                     holder.subcategoriesrecyclerview1.setVisibility(View.VISIBLE);
-                    holder.imgarrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_245);
+                    //holder.imgarrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_245);
                 } else {
                     holder.subcategoriesrecyclerview1.setVisibility(View.GONE);
-                    holder.imgarrow.setImageResource(R.drawable.dropdownarrow);
+                   // holder.imgarrow.setImageResource(R.drawable.dropdownarrow);
                 }
                 vallue = !vallue;
             }
         });
 
-        holder.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (vallue) {
-                    holder.subcategoriesrecyclerview1.setVisibility(View.VISIBLE);
-                    holder.imgarrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_245);
-                } else {
-                    holder.subcategoriesrecyclerview1.setVisibility(View.GONE);
-                    holder.imgarrow.setImageResource(R.drawable.dropdownarrow);
-                }
-                vallue = !vallue;
 
-
-            }
-        });
+//        holder.imgarrow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (vallue) {
+//                    holder.subcategoriesrecyclerview1.setVisibility(View.VISIBLE);
+//                    holder.imgarrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_245);
+//                } else {
+//                    holder.subcategoriesrecyclerview1.setVisibility(View.GONE);
+//                    holder.imgarrow.setImageResource(R.drawable.dropdownarrow);
+//                }
+//                vallue = !vallue;
+//            }
+//        });
+//
+//        holder.textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (vallue) {
+//                    holder.subcategoriesrecyclerview1.setVisibility(View.VISIBLE);
+//                    holder.imgarrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_245);
+//                } else {
+//                    holder.subcategoriesrecyclerview1.setVisibility(View.GONE);
+//                    holder.imgarrow.setImageResource(R.drawable.dropdownarrow);
+//                }
+//                vallue = !vallue;
+//
+//
+//            }
+//        });
         if (data.get(position).getSubcategories() != null) {
             subCategoriesRecylerAadapter1 = new SubCategoriesRecylerAadapter1(activity, data.get(position).getSubcategories());
             holder.subcategoriesrecyclerview1.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
@@ -104,13 +128,15 @@ public class CategoriesRecylerAdapter extends RecyclerView.Adapter<CategoriesRec
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public RecyclerView subcategoriesrecyclerview1;
-        public ImageView imgarrow;
+        //public ImageView imgarrow;
+        public MaterialCardView parentView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textView = (TextView) itemView.findViewById(R.id.tv_lang_name);
             this.subcategoriesrecyclerview1 = itemView.findViewById(R.id.subcategoriesrecyclerview1);
-            this.imgarrow = itemView.findViewById(R.id.imgarrow);
+            //this.imgarrow = itemView.findViewById(R.id.imgarrow);
+            this.parentView = itemView.findViewById(R.id.parentView);
         }
     }
 }

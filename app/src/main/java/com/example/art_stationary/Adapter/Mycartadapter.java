@@ -46,8 +46,9 @@ public class Mycartadapter extends RecyclerView.Adapter<Mycartadapter.RecyclerVi
         // Set the data to textview and imageview.
         Cartmodel recyclerData = cartmodelArrayList.get(position);
         Picasso.with(mcontext).load("http://kuwaitgate.com/artbookstore/"+imglist.get(position)).into(holder.img_item);
-        double ItemPrice = Double.parseDouble(recyclerData.getPrice()) * Double.parseDouble(recyclerData.getQuantity()+".000");
-        holder.textprice.setText(ItemPrice+"");
+      //  double ItemPrice = Double.parseDouble(recyclerData.getPrice()) * Double.parseDouble(recyclerData.getQuantity()+".000");
+       // holder.textprice.setText(ItemPrice+"");
+        holder.textprice.setText(recyclerData.getPrice());
         if (PreferenceHelper.getInstance(mcontext).getLangauage().equals("ar")){
             holder.textdescription.setText(recyclerData.getProdname());
         }else{

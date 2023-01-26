@@ -9,6 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.art_stationary.Adapter.CategoriesAdapter.MyTablayoutAdapter.MyTablayoutAdapter;
@@ -26,6 +28,7 @@ import java.util.TimerTask;
 public class ViewproductcategorywiseActivity extends AppCompatActivity {
     ArrayList<Subsubcategory> listFromActivity1 = new ArrayList<>();
     TabLayout tabLayout;
+    ImageView backBtn;
     ViewPager viewPager;
     private SubCategoriesViewFragment subCategoriesViewFragment;
     private Activity activity;
@@ -42,19 +45,22 @@ public class ViewproductcategorywiseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_viewproductcategorywise);
         activity = this;
         listFromActivity1 = this.getIntent().getExtras().getParcelableArrayList("StudentDetails");
-
-
+        postions = this.getIntent().getExtras().getInt("position");
         initViews();
-
-
-
-
     }
 
 
     private void initViews() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        backBtn = (ImageView) findViewById(R.id.backBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -87,13 +93,9 @@ public class ViewproductcategorywiseActivity extends AppCompatActivity {
             tabLayout.addTab(tabLayout.newTab().setText(listFromActivity1.get(i).getTitle()));
             tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         }
-
         adapter = new MyTablayoutAdapter(activity, getSupportFragmentManager(), tabLayout.getTabCount(), listFromActivity1);
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(postions);
     }
-
-
-
 
 }

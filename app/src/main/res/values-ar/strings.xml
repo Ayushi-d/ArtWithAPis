@@ -104,7 +104,7 @@
     <string name="selectSize">أختر الحجم</string>
     <string name="outOfStock">إنتهى من المخزن</string>
     <string name="description">وصف</string>
-    <string name="otherProducts">منتجات اخرى</string>
+    <string name="otherProducts">منتجات ذات صله</string>
 
     <!--Errors/Message-->
     <string name="emptyFields">لا يجوز أن يكون الحقل فارغًا</string>

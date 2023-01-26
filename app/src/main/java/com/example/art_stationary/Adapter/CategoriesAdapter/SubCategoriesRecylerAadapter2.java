@@ -61,6 +61,7 @@ public class SubCategoriesRecylerAadapter2 extends RecyclerView.Adapter<SubCateg
                 Bundle bundle = new Bundle();
 //                bundle.putParcelableArrayList("StudentDetails", subcategory.get(position).getSubsubcategories());
                 bundle.putParcelableArrayList("StudentDetails", subsubcategories);
+                bundle.putInt("position",position);
                 intent.putExtras(bundle);
                 activity.startActivity(intent);
             }

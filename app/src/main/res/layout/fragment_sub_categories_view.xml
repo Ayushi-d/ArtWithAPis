@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="zxjhcvzxvchjzxbhj"
+        android:visibility="gone"
         android:layout_margin="20dp"
         android:textColor="@color/purple_500"
         android:textStyle="bold" />

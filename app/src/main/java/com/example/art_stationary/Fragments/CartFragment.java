@@ -200,7 +200,8 @@ public class CartFragment extends Fragment implements ServiceResponse {
                         cartmodel.setPrice(cartData.optString("product_price"));
                         cartmodel.setQuantity(cartData.optString("quantity"));
                         quantity = Integer.parseInt(cartData.optString("quantity"));
-                        subTotalPrice = subTotalPrice + Double.parseDouble(cartData.optString("product_price"));
+                       // subTotalPrice = subTotalPrice + Double.parseDouble(cartData.optString("product_price"));
+                        //subTotalPrice = subTotalPrice + Double.parseDouble(cartData.optString("product_price"));
                         cartmodel.setCartID(cartData.optString("cartid"));
                         cartmodel.setId(cartData.optString("id"));
                         cartmodel.setProdid(cartData.optString("prodid"));

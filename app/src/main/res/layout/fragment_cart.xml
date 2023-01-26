@@ -109,7 +109,7 @@
         />
 
     <TextView
-        android:id="@+id/text_subtotalprice"
+            android:id="@+id/text_shippingprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guidelineright"
@@ -146,9 +146,9 @@
         app:layout_constraintTop_toTopOf="@id/text_shipping"
         app:layout_constraintBottom_toBottomOf="@id/text_shipping"
         />
-
+    <!--text_shippingprice-->
     <TextView
-        android:id="@+id/text_shippingprice"
+        android:id="@+id/text_subtotalprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guidelineright"

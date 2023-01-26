@@ -67,6 +67,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
     Colorhomeadapter colorhomeadapter;
     String ColorID = "";
     String SizeID = "";
+    double totalprice = 0;
 
     public ItemFragment() {
         // Required empty public constructor
@@ -145,6 +146,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 if (Integer.parseInt(text_item.getText().toString()) < Integer.parseInt(productQuantity) ){
                     int count = Integer.parseInt(text_item.getText().toString())+1;
                     text_item.setText(""+count);
+                    textprice.setText(getString(R.string.global_currency,""+(totalprice*Double.parseDouble(""+count))+"00"));
                 }else{
                     Toast.makeText(getActivity(), "Maximum Quantity for the product Already Selected", Toast.LENGTH_SHORT).show();
                 }
@@ -157,6 +159,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 if (Integer.parseInt(text_item.getText().toString()) > 1){
                     int count = Integer.parseInt(text_item.getText().toString())-1;
                     text_item.setText(""+count);
+                    textprice.setText(getString(R.string.global_currency,""+(totalprice*Double.parseDouble(""+count))+"00"));
                 }
             }
         });
@@ -188,6 +191,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 offerPrice.setText(combinationModel.getSaleprice().equals("")  ? "" : getString(R.string.global_currency,combinationModel.getPrice()) );
                 offerPrice.setPaintFlags(offerPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                 textprice.setText(combinationModel.getSaleprice().equals("") ? getString(R.string.global_currency,combinationModel.getPrice()) : getString(R.string.global_currency,combinationModel.getSaleprice()));
+                totalprice = combinationModel.getSaleprice().equals("") ? Double.parseDouble( combinationModel.getPrice()) : Double.parseDouble(combinationModel.getSaleprice());
             }
         });
 
@@ -220,6 +224,7 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 offerPrice.setText(combinationModel.getSaleprice().equals("")  ? "" : getString(R.string.global_currency,combinationModel.getPrice()) );
                 offerPrice.setPaintFlags(offerPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                 textprice.setText(combinationModel.getSaleprice().equals("") ? getString(R.string.global_currency,combinationModel.getPrice()) : getString(R.string.global_currency,combinationModel.getSaleprice()));
+                totalprice = combinationModel.getSaleprice().equals("") ? Double.parseDouble( combinationModel.getPrice()) : Double.parseDouble(combinationModel.getSaleprice());
             }
         });
 
@@ -271,15 +276,6 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                 for (int i = 0; i < combinationArray.length(); i++){
                     JSONObject combinationData = combinationArray.optJSONObject(i);
                     CombinationModel combinationModel = new CombinationModel();
-                    if (i==0){
-                        ColorID = combinationData.optString("colorid");
-                        SizeID = combinationData.optString("sizeid");
-                        combinationModel.setSelectedColor(true);
-                        offerPrice.setText(data.optString("saleprice").equals("") || data.isNull("saleprice") ? "" : getString(R.string.global_currency,data.optString("price")) );
-                        offerPrice.setPaintFlags(offerPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-                        textprice.setText(data.optString("saleprice").equals("") || data.isNull("saleprice") ? getString(R.string.global_currency,data.optString("price")) : getString(R.string.global_currency,data.optString("saleprice")));
-                        productQuantity = combinationData.optString("quantity");
-                    }
                     combinationModel.setColorid(combinationData.optString("colorid"));
                     combinationModel.setColorCode(combinationData.optString("colorcode"));
                     combinationModel.setPrice(combinationData.optString("price"));
@@ -287,11 +283,25 @@ public class ItemFragment extends Fragment implements ServiceResponse {
                     combinationModel.setSizename(combinationData.optString("sizename"));
                     combinationModel.setSizeid(combinationData.optString("sizeid"));
                     combinationModel.setQuantity(combinationData.optString("quantity"));
+                    if (i==0){
+                        ColorID = combinationData.optString("colorid");
+                        SizeID = combinationData.optString("sizeid");
+                        combinationModel.setSelectedColor(true);
+
+                        productQuantity = combinationData.optString("quantity");
+                    }
                     combinationModelList.add(combinationModel);
                 }
                 colorhomeadapter.notifyDataSetChanged();
                 sizeadapter.notifyDataSetChanged();
+                offerPrice.setText(combinationModelList.get(0).getSaleprice().equals("")  ? "" : getString(R.string.global_currency,combinationModelList.get(0).getPrice()) );
+                offerPrice.setPaintFlags(offerPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                textprice.setText(combinationModelList.get(0).getSaleprice().equals("") ? getString(R.string.global_currency,combinationModelList.get(0).getPrice()) : getString(R.string.global_currency,combinationModelList.get(0).getSaleprice()));
+                totalprice = combinationModelList.get(0).getSaleprice().equals("") ? Double.parseDouble( combinationModelList.get(0).getPrice()) : Double.parseDouble(combinationModelList.get(0).getSaleprice());
 
+//                offerPrice.setText(data.optString("saleprice").equals("") || data.isNull("saleprice") ? ""  : getString(R.string.global_currency,data.optString("price")) );
+//                offerPrice.setPaintFlags(offerPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+//                textprice.setText(data.optString("saleprice").equals("") || data.isNull("saleprice") ? getString(R.string.global_currency,data.optString("price")) : getString(R.string.global_currency,data.optString("saleprice")));
             }catch (Exception e){
 
             }

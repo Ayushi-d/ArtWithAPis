@@ -30,18 +30,22 @@ public class SubCategoriesViewFragmentPresenter {
     }
 
     public void getcategories(String id) {
-        idvalue = MultipartBody.Part.createFormData("subcatid","4");
+        idvalue = MultipartBody.Part.createFormData("subcatid",id);
 
         WebServices.getmInstance().getproductbyid(idvalue,new GetproductByidHandler() {
 
             @Override
             public void onSuccess(GetproductbyidExample example) {
 
+                if (example.getOutput().getSuccess() == 0){
+                    Toast.makeText(activity, "No Product Found", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 viewproductCategoryAdapter = new ViewproductCategoryAdapter(activity,example.getOutput().getData());
                 LinearLayoutManager linearLayoutManager = new GridLayoutManager(activity, 2);
                 viewproductRecylerView.setLayoutManager(linearLayoutManager);
                 viewproductRecylerView.setAdapter(viewproductCategoryAdapter);
-
 
             }
 

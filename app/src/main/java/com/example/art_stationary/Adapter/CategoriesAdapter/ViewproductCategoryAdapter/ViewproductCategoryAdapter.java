@@ -1,6 +1,7 @@
 package com.example.art_stationary.Adapter.CategoriesAdapter.ViewproductCategoryAdapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.art_stationary.Activity.ViewproductcategorywiseActivity;
 import com.example.art_stationary.Model.GetproductbyidModel.Datum;
 import com.example.art_stationary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +43,9 @@ public class ViewproductCategoryAdapter extends RecyclerView.Adapter<Viewproduct
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-
+        Picasso.with(activity).load("http://kuwaitgate.com/artbookstore/"+data.get(position).getImage()).into(holder.img_book);
         holder.tv_bookname.setText(data.get(position).getTitle());
+        holder.tv_pricebook.setText(data.get(position).getPrice());
     }
 
     @Override

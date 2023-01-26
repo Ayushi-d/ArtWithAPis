@@ -106,7 +106,7 @@
     <string name="selectSize">Select Size</string>
     <string name="outOfStock">Out of Stock</string>
     <string name="description">Description</string>
-    <string name="otherProducts">Other Products</string>
+    <string name="otherProducts">Related Products</string>
 
     <!--Errors/Message-->
     <string name="emptyFields">Field can\'t be empty</string>

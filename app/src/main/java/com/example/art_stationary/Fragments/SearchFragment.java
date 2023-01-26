@@ -144,7 +144,6 @@ public class SearchFragment extends Fragment implements ServiceResponse {
         if (requestCode == 1) {
             try {
                 if (resCode == 200) {
-                   // searcharraylist.clear();
                     JSONObject jsonObject = new JSONObject(result);
                     JSONObject output = jsonObject.getJSONObject("output");
                     JSONArray data = output.getJSONArray("data");
