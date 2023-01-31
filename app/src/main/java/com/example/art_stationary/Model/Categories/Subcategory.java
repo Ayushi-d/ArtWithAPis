@@ -1,12 +1,15 @@
 
 package com.example.art_stationary.Model.Categories;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Subcategory {
+public class Subcategory implements Parcelable {
     public String id;
     public String parent_id;
     public String title;
@@ -37,6 +40,54 @@ public class Subcategory {
         this.is_homecategory = is_homecategory;
         this.subsubcategories = subsubcategories;
     }
+
+    protected Subcategory(Parcel in) {
+        id = in.readString();
+        parent_id = in.readString();
+        title = in.readString();
+        titlear = in.readString();
+        slug = in.readString();
+        description = in.readString();
+        sequence = in.readString();
+        image = in.readString();
+        seo_title = in.readString();
+        status = in.readString();
+        is_homecategory = in.readString();
+        subsubcategories = in.createTypedArrayList(Subsubcategory.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(parent_id);
+        dest.writeString(title);
+        dest.writeString(titlear);
+        dest.writeString(slug);
+        dest.writeString(description);
+        dest.writeString(sequence);
+        dest.writeString(image);
+        dest.writeString(seo_title);
+        dest.writeString(status);
+        dest.writeString(is_homecategory);
+        dest.writeTypedList(subsubcategories);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Subcategory> CREATOR = new Creator<Subcategory>() {
+        @Override
+        public Subcategory createFromParcel(Parcel in) {
+            return new Subcategory(in);
+        }
+
+        @Override
+        public Subcategory[] newArray(int size) {
+            return new Subcategory[size];
+        }
+    };
 
     public String getId() {
         return id;

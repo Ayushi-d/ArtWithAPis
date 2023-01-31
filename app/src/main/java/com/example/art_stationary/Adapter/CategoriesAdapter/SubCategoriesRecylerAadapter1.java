@@ -1,5 +1,8 @@
 package com.example.art_stationary.Adapter.CategoriesAdapter;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +12,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.art_stationary.Activity.ViewproductcategorywiseActivity;
 import com.example.art_stationary.Adapter.CategoriesRecylerAdapter;
 import com.example.art_stationary.Model.Categories.Datum;
 import com.example.art_stationary.Model.Categories.Subcategory;
 import com.example.art_stationary.R;
 import com.example.art_stationary.Utils.PreferenceHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubCategoriesRecylerAadapter1 extends RecyclerView.Adapter<SubCategoriesRecylerAadapter1.ViewHolder> {
@@ -50,6 +55,20 @@ public class SubCategoriesRecylerAadapter1 extends RecyclerView.Adapter<SubCateg
             holder.textView.setText(subcategories.get(position).getTitle());
 
         }
+
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, ViewproductcategorywiseActivity.class);
+                intent.putExtra("categorycheck","fromoneadapter");
+                Bundle bundle = new Bundle();
+//                bundle.putParcelableArrayList("StudentDetails", subcategory.get(position).getSubsubcategories());
+                bundle.putParcelableArrayList("categoryone", (ArrayList<? extends Parcelable>) subcategories);
+                bundle.putInt("position",position);
+                intent.putExtras(bundle);
+                activity.startActivity(intent);
+            }
+        });
 //        holder.imageView.setImageResource(listdata[position].getImgId());
         if (subcategories.get(position).getSubsubcategories()!=null){
             subCategoriesRecylerAadapter2 = new SubCategoriesRecylerAadapter2(activity,subcategories.get(position).getSubsubcategories(),subcategories);

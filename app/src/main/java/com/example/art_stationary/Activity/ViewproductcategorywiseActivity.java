@@ -1,29 +1,23 @@
 package com.example.art_stationary.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.art_stationary.Adapter.CategoriesAdapter.MyTablayoutAdapter.MyTablayoutAdapter;
-import com.example.art_stationary.Adapter.CategoriesAdapter.ViewproductCategoryAdapter.ViewproductCategoryAdapter;
 import com.example.art_stationary.Fragments.SubCategoriesViewFragment.SubCategoriesViewFragment;
+import com.example.art_stationary.Model.Categories.Subcategory;
 import com.example.art_stationary.Model.Categories.Subsubcategory;
 import com.example.art_stationary.R;
-import com.example.art_stationary.Utils.PreferenceHelper;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class ViewproductcategorywiseActivity extends AppCompatActivity {
     ArrayList<Subsubcategory> listFromActivity1 = new ArrayList<>();
@@ -37,6 +31,9 @@ public class ViewproductcategorywiseActivity extends AppCompatActivity {
     private MyTablayoutAdapter adapter;
     Timer timer = new Timer(); //Global declaration
     private String value;
+    private ArrayList<Subcategory> subcategoryonelist = new ArrayList<>();
+    String getvaluecategory;
+
 
 
     @Override
@@ -44,10 +41,36 @@ public class ViewproductcategorywiseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewproductcategorywise);
         activity = this;
-        listFromActivity1 = this.getIntent().getExtras().getParcelableArrayList("StudentDetails");
-        postions = this.getIntent().getExtras().getInt("position");
-        initViews();
+
+         getvaluecategory = getIntent().getStringExtra("categorycheck");
+
+        if (getvaluecategory.equals("fromoneadapter")) {
+            subcategoryonelist = this.getIntent().getExtras().getParcelableArrayList("categoryone");
+            initViews();
+        } else {
+            listFromActivity1 = this.getIntent().getExtras().getParcelableArrayList("StudentDetails");
+            postions = this.getIntent().getExtras().getInt("position");
+            initViews();
+
+        }
     }
+
+
+
+
+
+
+//        if (getIntent().getStringExtra("fromseccategory") != null) {
+////          subcategoryone =  this.getIntent().getExtras().getParcelableArrayList("categoryone");
+////
+////            Toast.makeText(activity,    subcategoryone.size()+"" , Toast.LENGTH_SHORT).show();
+////        }else {
+////
+////        }
+////        listFromActivity1 = this.getIntent().getExtras().getParcelableArrayList("StudentDetails");
+////        postions = this.getIntent().getExtras().getInt("position");
+////        initViews();
+//        }
 
 
     private void initViews() {
@@ -84,18 +107,36 @@ public class ViewproductcategorywiseActivity extends AppCompatActivity {
 
             }
         });
-        setDynamicFragmentToTabLayout();
+
+            setDynamicFragmentToTabLayout();
+
+
 
     }
 
+
+
     private void setDynamicFragmentToTabLayout() {
-        for (int i = 0; i < listFromActivity1.size(); i++) {
-            tabLayout.addTab(tabLayout.newTab().setText(listFromActivity1.get(i).getTitle()));
-            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        if (getvaluecategory.equals("fromoneadapter")){
+            for (int i = 0; i < subcategoryonelist.size(); i++) {
+                tabLayout.addTab(tabLayout.newTab().setText(subcategoryonelist.get(i).getTitle()));
+                tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            }
+            adapter = new MyTablayoutAdapter(activity, getSupportFragmentManager(), tabLayout.getTabCount(),listFromActivity1, subcategoryonelist,getvaluecategory);
+            viewPager.setAdapter(adapter);
+            viewPager.setCurrentItem(postions);
+        }else {
+            for (int i = 0; i < listFromActivity1.size(); i++) {
+                tabLayout.addTab(tabLayout.newTab().setText(listFromActivity1.get(i).getTitle()));
+                tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            }
+            adapter = new MyTablayoutAdapter(activity, getSupportFragmentManager(), tabLayout.getTabCount(), listFromActivity1,subcategoryonelist, getvaluecategory);
+            viewPager.setAdapter(adapter);
+            viewPager.setCurrentItem(postions);
         }
-        adapter = new MyTablayoutAdapter(activity, getSupportFragmentManager(), tabLayout.getTabCount(), listFromActivity1);
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(postions);
+
+
     }
 
 }

@@ -58,6 +58,7 @@ public class SubCategoriesRecylerAadapter2 extends RecyclerView.Adapter<SubCateg
 
 //                Log.d("checkingid",subcategory.get(position).getSubsubcategories().size()+"");
                 Intent intent = new Intent(activity, ViewproductcategorywiseActivity.class);
+                intent.putExtra("categorycheck","fromsecondadapter");
                 Bundle bundle = new Bundle();
 //                bundle.putParcelableArrayList("StudentDetails", subcategory.get(position).getSubsubcategories());
                 bundle.putParcelableArrayList("StudentDetails", subsubcategories);
